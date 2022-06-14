@@ -17,6 +17,15 @@ class WelcomeViewController: UIViewController {
         super.viewDidLoad()
 
         randomBackgroundImage()
+        
+        let gSignIn = GIDSignInButton(frame: CGRect(x: 0, y: 0, width: 230, height: 48))
+        gSignIn.center = view.center
+        view.addSubview(gSignIn)
+        
+        let gSignIn = FBSDKLoginButton(frame: CGRect(x: 0, y: 0, width: 230, height: 48))
+        gSignIn.center = view.center
+        view.addSubview(gSignIn)
+        
     }
     
     //MARK: Change background image to random
