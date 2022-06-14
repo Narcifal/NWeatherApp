@@ -84,6 +84,7 @@
                     </view>
                     <connections>
                         <outlet property="backgroundImage" destination="Edf-e9-6Zc" id="BEs-D3-Sbn"/>
+                        <outlet property="facebookLoginButton" destination="afp-6Q-ekn" id="woo-PM-tfl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

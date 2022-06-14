@@ -13,6 +13,7 @@ class WelcomeViewController: UIViewController {
 
     @IBOutlet var backgroundImage: UIImageView!
 
+    @IBOutlet weak var facebookLoginButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,7 +21,7 @@ class WelcomeViewController: UIViewController {
         
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().presentingViewController = self
-
+        
         LoginManager().logOut()
     }
 
@@ -29,8 +30,23 @@ class WelcomeViewController: UIViewController {
     }
     
     @IBAction func facebookSignIn(_ sender: UIButton) {
-        loginButton.addTarget(self, action: #selector(loginButtonClicked), for: .touchUpInside)
+        
+        if let token = AccessToken.current, !token.isExpired {
+
+                    let token = token.tokenString
+
+                    let request = FBSDKLoginKit.GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], tokenString: token, version: nil, httpMethod: .get)
+
+                    request.start { connection, result, error in
+                        print(result as Any)
+                    }
+
+                } else {
+                    let manager = LoginManager()
+                    manager.logIn()
+                }
     }
+
     
     //MARK: Change background image to random
     func randomBackgroundImage() {
