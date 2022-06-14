@@ -9,7 +9,7 @@ import UIKit
 import FBSDKLoginKit
 import GoogleSignIn
 
-class WelcomeViewController: UIViewController {
+class WelcomeViewController: UIViewController, LoginButtonDelegate {
 
     @IBOutlet var backgroundImage: UIImageView!
 
@@ -22,11 +22,28 @@ class WelcomeViewController: UIViewController {
         gSignIn.center = view.center
         view.addSubview(gSignIn)
         
-        let gSignIn = FBSDKLoginButton(frame: CGRect(x: 0, y: 0, width: 230, height: 48))
-        gSignIn.center = view.center
-        view.addSubview(gSignIn)
+        let loginButton = FBLoginButton()
+        loginButton.bottomAnchor = view.bottomAnchor
+        loginButton.delegate = self
+        loginButton.permissions = ["public_profile", "email"]
+        view.addSubview(loginButton)
         
     }
+    
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        let token = result?.token?.tokenString
+
+        let request = FBSDKLoginKit.GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], tokenString: token, version: nil, httpMethod: .get)
+
+        request.start { connection, result, error in
+            print(result)
+        }
+    }
+
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+        LoginManager().logOut()
+    }
+
     
     //MARK: Change background image to random
     func randomBackgroundImage() {
