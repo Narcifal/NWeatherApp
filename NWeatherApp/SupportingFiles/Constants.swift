@@ -20,7 +20,7 @@ struct Constants {
     
     struct API {
         static let googleMapsApi = "AIzaSyAGDORMYoad9KIzrDiA-DZ5Ffc-uVo11xg"
-        
+        static let googleSignInClientID = "661995097316-078fdgscnh5qhp0tlsn5slftqpv161v5.apps.googleusercontent.com"
     }
     
 }

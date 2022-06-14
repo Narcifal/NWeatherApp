@@ -9,7 +9,7 @@ import UIKit
 import FBSDKLoginKit
 import GoogleSignIn
 
-class WelcomeViewController: UIViewController, LoginButtonDelegate {
+class WelcomeViewController: UIViewController {
 
     @IBOutlet var backgroundImage: UIImageView!
 
@@ -18,17 +18,48 @@ class WelcomeViewController: UIViewController, LoginButtonDelegate {
 
         randomBackgroundImage()
         
-        let gSignIn = GIDSignInButton(frame: CGRect(x: 0, y: 0, width: 230, height: 48))
-        gSignIn.center = view.center
-        view.addSubview(gSignIn)
-        
-        let loginButton = FBLoginButton()
-        loginButton.bottomAnchor = view.bottomAnchor
-        loginButton.delegate = self
-        loginButton.permissions = ["public_profile", "email"]
-        view.addSubview(loginButton)
-        
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().presentingViewController = self
+
+        LoginManager().logOut()
     }
+
+    @IBAction func googleSignIn(_ sender: UIButton) {
+        GIDSignIn.sharedInstance().signIn()
+    }
+    
+    @IBAction func facebookSignIn(_ sender: UIButton) {
+        loginButton.addTarget(self, action: #selector(loginButtonClicked), for: .touchUpInside)
+    }
+    
+    //MARK: Change background image to random
+    func randomBackgroundImage() {
+        let randomNumber = Int.random(in: 0..<6)
+        
+        switch(randomNumber) {
+        case 0:
+            backgroundImage.image = UIImage(named: Constants.BackgroundImage.deepNight)
+        case 1:
+            backgroundImage.image = UIImage(named: Constants.BackgroundImage.fallingStar)
+        case 2:
+            backgroundImage.image = UIImage(named: Constants.BackgroundImage.greenLeaves)
+        case 3:
+            backgroundImage.image = UIImage(named: Constants.BackgroundImage.riverMountain)
+        case 4:
+            backgroundImage.image = UIImage(named: Constants.BackgroundImage.sunsetField)
+        case 5:
+            backgroundImage.image = UIImage(named: Constants.BackgroundImage.twilightMoon)
+        default:
+            backgroundImage.image = UIImage(named: Constants.BackgroundImage.greenLeaves)
+        }
+        
+        backgroundImage.alpha = 0.5
+    }
+
+}
+
+//MARK: Facebook delegate methods
+extension WelcomeViewController: LoginButtonDelegate {
     
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         let token = result?.token?.tokenString
@@ -36,37 +67,23 @@ class WelcomeViewController: UIViewController, LoginButtonDelegate {
         let request = FBSDKLoginKit.GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], tokenString: token, version: nil, httpMethod: .get)
 
         request.start { connection, result, error in
-            print(result)
+            print(result as Any)
         }
     }
 
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
         LoginManager().logOut()
     }
+}
 
+//MARK: Google delegate methods
+
+extension WelcomeViewController: GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+            print("User email: \(user?.profile.email ?? "no email")")
+    }
     
-    //MARK: Change background image to random
-    func randomBackgroundImage() {
-            let randomNumber = Int.random(in: 0..<6)
-            
-            switch(randomNumber) {
-            case 0:
-                backgroundImage.image = UIImage(named: Constants.BackgroundImage.deepNight)
-            case 1:
-                backgroundImage.image = UIImage(named: Constants.BackgroundImage.fallingStar)
-            case 2:
-                backgroundImage.image = UIImage(named: Constants.BackgroundImage.greenLeaves)
-            case 3:
-                backgroundImage.image = UIImage(named: Constants.BackgroundImage.riverMountain)
-            case 4:
-                backgroundImage.image = UIImage(named: Constants.BackgroundImage.sunsetField)
-            case 5:
-                backgroundImage.image = UIImage(named: Constants.BackgroundImage.twilightMoon)
-            default:
-                backgroundImage.image = UIImage(named: Constants.BackgroundImage.greenLeaves)
-            }
-            
-            backgroundImage.alpha = 0.5
-        }
-
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        return ((GIDSignIn.sharedInstance()?.handle(url)) != nil)
+    }
 }
