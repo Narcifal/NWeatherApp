@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Welcome View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="WelcomeViewController" customModule="NWeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="greenLeavesBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Edf-e9-6Zc">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login with" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1N-Gi-Eu8">
+                                <rect key="frame" x="0.0" y="384.5" width="414" height="32.5"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🌱NWeatherApp" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exP-62-jwI">
+                                <rect key="frame" x="0.0" y="199" width="414" height="45.5"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="35"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="exP-62-jwI" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="2bd-Da-TBa"/>
+                            <constraint firstItem="O1N-Gi-Eu8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="4fJ-op-qSX"/>
+                            <constraint firstAttribute="bottom" secondItem="Edf-e9-6Zc" secondAttribute="bottom" id="55u-m0-tzE"/>
+                            <constraint firstItem="O1N-Gi-Eu8" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="812-Ea-K3m"/>
+                            <constraint firstItem="Edf-e9-6Zc" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Ha4-y9-bMa"/>
+                            <constraint firstItem="Edf-e9-6Zc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MfI-4h-EFr"/>
+                            <constraint firstItem="O1N-Gi-Eu8" firstAttribute="top" secondItem="exP-62-jwI" secondAttribute="bottom" constant="140" id="X2k-5l-ak9"/>
+                            <constraint firstItem="Edf-e9-6Zc" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="efN-gv-UbC"/>
+                            <constraint firstItem="exP-62-jwI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="155" id="kgX-BK-0A4"/>
+                            <constraint firstItem="exP-62-jwI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="vU5-VE-pB3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundImage" destination="Edf-e9-6Zc" id="BEs-D3-Sbn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-23.188405797101453" y="77.678571428571431"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="greenLeavesBackground" width="2736" height="5927"/>
+    </resources>
+</document>
