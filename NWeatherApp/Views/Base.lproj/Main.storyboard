@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8TH-Id-c8u">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -19,21 +19,64 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login with" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1N-Gi-Eu8">
-                                <rect key="frame" x="0.0" y="384.5" width="414" height="32.5"/>
+                                <rect key="frame" x="0.0" y="388.5" width="414" height="32.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🌱NWeatherApp" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exP-62-jwI">
-                                <rect key="frame" x="0.0" y="199" width="414" height="45.5"/>
+                                <rect key="frame" x="0.0" y="243" width="414" height="45.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="35"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afp-6Q-ekn">
-                                <rect key="frame" x="80" y="590" width="255" height="53"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lSg-eX-kJ0">
+                                <rect key="frame" x="79.5" y="528" width="255" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="TZ9-na-3DR"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="googleLogo-29" imagePlacement="leading" title="Google" imagePadding="62">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="googleSignIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lHL-BU-nqx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="80P-17-QRn">
+                                <rect key="frame" x="79.5" y="453" width="255" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="4ej-LP-Tpv"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Without Authorization">
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="kGJ-AN-eVN" kind="showDetail" identifier="goToWeather" id="e9T-RC-N4v"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afp-6Q-ekn">
+                                <rect key="frame" x="79.5" y="603" width="255" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="TjC-Vr-2MP"/>
+                                </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="facebookLogo-29" title="Facebook" imagePadding="10">
@@ -48,68 +91,43 @@
                                     <action selector="facebookSignIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zir-Xa-bDJ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="80P-17-QRn">
-                                <rect key="frame" x="80" y="439" width="255" height="53"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.68301611630000003" green="0.88150376080000004" blue="0.84347726700000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Go To Weather">
-                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <segue destination="kGJ-AN-eVN" kind="showDetail" identifier="goToWeather" id="e9T-RC-N4v"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lSg-eX-kJ0">
-                                <rect key="frame" x="80" y="515" width="255" height="53"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="googleLogo-29" title="Google" imagePadding="10">
-                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="googleSignIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lHL-BU-nqx"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="afp-6Q-ekn" secondAttribute="trailing" constant="79.5" id="170-nq-JRu"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lSg-eX-kJ0" secondAttribute="trailing" constant="79.5" id="19p-6A-rBh"/>
+                            <constraint firstItem="80P-17-QRn" firstAttribute="top" secondItem="O1N-Gi-Eu8" secondAttribute="bottom" constant="32" id="1hZ-NN-Ehb"/>
+                            <constraint firstItem="lSg-eX-kJ0" firstAttribute="top" secondItem="80P-17-QRn" secondAttribute="bottom" constant="25" id="2JP-0F-9JH"/>
                             <constraint firstItem="exP-62-jwI" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="2bd-Da-TBa"/>
                             <constraint firstItem="O1N-Gi-Eu8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="4fJ-op-qSX"/>
                             <constraint firstAttribute="bottom" secondItem="Edf-e9-6Zc" secondAttribute="bottom" id="55u-m0-tzE"/>
                             <constraint firstItem="O1N-Gi-Eu8" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="812-Ea-K3m"/>
+                            <constraint firstItem="afp-6Q-ekn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="79.5" id="Gkq-OB-sOl"/>
                             <constraint firstItem="Edf-e9-6Zc" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Ha4-y9-bMa"/>
                             <constraint firstItem="Edf-e9-6Zc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MfI-4h-EFr"/>
-                            <constraint firstItem="O1N-Gi-Eu8" firstAttribute="top" secondItem="exP-62-jwI" secondAttribute="bottom" constant="140" id="X2k-5l-ak9"/>
+                            <constraint firstItem="O1N-Gi-Eu8" firstAttribute="top" secondItem="exP-62-jwI" secondAttribute="bottom" constant="100" id="X2k-5l-ak9"/>
                             <constraint firstItem="Edf-e9-6Zc" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="efN-gv-UbC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="80P-17-QRn" secondAttribute="trailing" constant="79.5" id="fvu-Oj-g3L"/>
                             <constraint firstItem="exP-62-jwI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="155" id="kgX-BK-0A4"/>
+                            <constraint firstItem="lSg-eX-kJ0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="79.5" id="uxG-Z2-76k"/>
+                            <constraint firstItem="80P-17-QRn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="79.5" id="vE5-F1-gKz"/>
                             <constraint firstItem="exP-62-jwI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="vU5-VE-pB3"/>
+                            <constraint firstItem="afp-6Q-ekn" firstAttribute="top" secondItem="lSg-eX-kJ0" secondAttribute="bottom" constant="25" id="xtW-vL-zMV"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="lfr-hQ-R3T"/>
                     <connections>
                         <outlet property="backgroundImage" destination="Edf-e9-6Zc" id="BEs-D3-Sbn"/>
                         <outlet property="facebookLoginButton" destination="afp-6Q-ekn" id="woo-PM-tfl"/>
+                        <outlet property="googleButton" destination="lSg-eX-kJ0" id="g8V-oB-Srq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-23.188405797101453" y="77.678571428571431"/>
+            <point key="canvasLocation" x="886.95652173913049" y="77.678571428571431"/>
         </scene>
-        <!--Weather View Controller-->
+        <!--City-->
         <scene sceneID="dto-hT-oL3">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="kGJ-AN-eVN" customClass="WeatherViewController" customModule="NWeatherApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -148,6 +166,7 @@
                             <constraint firstItem="TAE-DU-siV" firstAttribute="leading" secondItem="TdS-oL-7BI" secondAttribute="leading" id="z3X-5T-hi5"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="City" id="oLS-4d-sOI"/>
                     <connections>
                         <outlet property="backgroundImage" destination="TAE-DU-siV" id="vTe-QJ-9eX"/>
                         <outlet property="cityLabel" destination="Hio-J1-1hC" id="mUE-lO-eff"/>
@@ -156,7 +175,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vub-O0-xKK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="740.57971014492762" y="78.348214285714278"/>
+            <point key="canvasLocation" x="1650.7246376811595" y="78.348214285714278"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="NLj-7T-q3W">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8TH-Id-c8u" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cla-ki-QRG">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="eOJ-6O-Qat"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4P0-a1-yCV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-23.188405797101453" y="77.678571428571431"/>
         </scene>
     </scenes>
     <resources>

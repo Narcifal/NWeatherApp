@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		339E61EF864ACF4E6F1C155C /* Pods_NWeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 218EC00745B61ADC2C99EB67 /* Pods_NWeatherApp.framework */; };
+		9A14D4CB285A20FC0089A38C /* data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A14D4CA285A20FC0089A38C /* data.swift */; };
 		9A92A3DE2859106B004FCF87 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A92A3DD2859106B004FCF87 /* WelcomeViewController.swift */; };
 		9A92A3E02859107A004FCF87 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A92A3DF2859107A004FCF87 /* Constants.swift */; };
 		9A92A3E2285910AE004FCF87 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A92A3E1285910AE004FCF87 /* GoogleService-Info.plist */; };
@@ -23,6 +24,7 @@
 		218EC00745B61ADC2C99EB67 /* Pods_NWeatherApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NWeatherApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6511CB5D65A5E330F08D52EC /* Pods-NWeatherApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NWeatherApp.release.xcconfig"; path = "Target Support Files/Pods-NWeatherApp/Pods-NWeatherApp.release.xcconfig"; sourceTree = "<group>"; };
 		7B584EAF2A87541CD86486A0 /* Pods-NWeatherApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NWeatherApp.debug.xcconfig"; path = "Target Support Files/Pods-NWeatherApp/Pods-NWeatherApp.debug.xcconfig"; sourceTree = "<group>"; };
+		9A14D4CA285A20FC0089A38C /* data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = data.swift; sourceTree = "<group>"; };
 		9A92A3DD2859106B004FCF87 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		9A92A3DF2859107A004FCF87 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9A92A3E1285910AE004FCF87 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			children = (
 				9A92A3DD2859106B004FCF87 /* WelcomeViewController.swift */,
 				9AEF79EA28590CF6002DC18F /* WeatherViewController.swift */,
+				9A14D4CA285A20FC0089A38C /* data.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A92A3E02859107A004FCF87 /* Constants.swift in Sources */,
+				9A14D4CB285A20FC0089A38C /* data.swift in Sources */,
 				9AEF79EB28590CF6002DC18F /* WeatherViewController.swift in Sources */,
 				9A92A3DE2859106B004FCF87 /* WelcomeViewController.swift in Sources */,
 				9AEF79E728590CF6002DC18F /* AppDelegate.swift in Sources */,
