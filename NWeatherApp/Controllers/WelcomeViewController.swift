@@ -19,36 +19,67 @@ class WelcomeViewController: UIViewController {
 
         randomBackgroundImage()
         
+        //Set Google delegate
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().presentingViewController = self
         
+        //LogOut from Facebook on load
         LoginManager().logOut()
+        
+        //LogOut from Facebook on load
+        GIDSignIn.sharedInstance().signOut()
     }
 
+    
+    //MARK: SignIn with Google
+    
     @IBAction func googleSignIn(_ sender: UIButton) {
         GIDSignIn.sharedInstance().signIn()
+
+        //performSegue(withIdentifier: Constants.Segues.goToWeather, sender: nil)
     }
     
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        WeatherViewController().modalPresentationStyle = .fullScreen
+////        if segue.identifier == Constants.Segues.goToWeather {
+////            if let nextViewController = segue.destination as? WeatherViewController {
+////
+////            }
+////        }
+//    }
+    
+    
+    //MARK: SignIn with Facebook
+    
     @IBAction func facebookSignIn(_ sender: UIButton) {
-        
+        //Method to check if access token is expired
         if let token = AccessToken.current, !token.isExpired {
+            let token = token.tokenString
+            let request = FBSDKLoginKit.GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], tokenString: token, version: nil, httpMethod: .get)
 
-                    let token = token.tokenString
+            request.start { connection, result, error in
+                print(result as Any)
+            }
+        } else {
+            //Load Facebook manager
+            
+            let manager = LoginManager()
+            manager.logIn()
+//            if AccessToken.current != nil {
+//
+//                manager.logOut()
+//                print("-------------------------out")
+//                facebookLoginButton.setTitle("SignIn", for: .normal)
+//            } else {
+//                facebookLoginButton.setTitle("LogOut", for: .normal)
+//            }
 
-                    let request = FBSDKLoginKit.GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], tokenString: token, version: nil, httpMethod: .get)
-
-                    request.start { connection, result, error in
-                        print(result as Any)
-                    }
-
-                } else {
-                    let manager = LoginManager()
-                    manager.logIn()
-                }
+        }
     }
 
     
     //MARK: Change background image to random
+    
     func randomBackgroundImage() {
         let randomNumber = Int.random(in: 0..<6)
         
@@ -74,7 +105,9 @@ class WelcomeViewController: UIViewController {
 
 }
 
+
 //MARK: Facebook delegate methods
+
 extension WelcomeViewController: LoginButtonDelegate {
     
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
@@ -91,6 +124,7 @@ extension WelcomeViewController: LoginButtonDelegate {
         LoginManager().logOut()
     }
 }
+
 
 //MARK: Google delegate methods
 
