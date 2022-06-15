@@ -13,12 +13,16 @@ class WelcomeViewController: UIViewController {
 
     @IBOutlet var backgroundImage: UIImageView!
 
+    @IBOutlet weak var googleButton: UIButton!
     @IBOutlet weak var facebookLoginButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        randomBackgroundImage()
         
+        //Load random background image
+        randomBackgroundImage()
+        googleButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 0)
+        googleButton.contentHorizontalAlignment = .center
         //LogOut from Facebook on load
         LoginManager().logOut()
         

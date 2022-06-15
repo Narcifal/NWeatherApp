@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -30,7 +31,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lSg-eX-kJ0">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lSg-eX-kJ0">
                                 <rect key="frame" x="79.5" y="528" width="255" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -38,8 +39,7 @@
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="googleLogo-29" imagePlacement="leading" title="Google" imagePadding="62">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
+                                <buttonConfiguration key="configuration" style="plain" image="googleLogo-29" imagePlacement="leading" title="Google" imagePadding="0.0">
                                     <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <userDefinedRuntimeAttributes>
@@ -68,7 +68,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="kGJ-AN-eVN" kind="showDetail" identifier="goToWeather" id="e9T-RC-N4v"/>
+                                    <segue destination="kGJ-AN-eVN" kind="push" identifier="goToWeather" id="e9T-RC-N4v"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afp-6Q-ekn">
@@ -120,14 +120,14 @@
                     <connections>
                         <outlet property="backgroundImage" destination="Edf-e9-6Zc" id="BEs-D3-Sbn"/>
                         <outlet property="facebookLoginButton" destination="afp-6Q-ekn" id="woo-PM-tfl"/>
-                        <outlet property="googleButton" destination="lSg-eX-kJ0" id="g8V-oB-Srq"/>
+                        <outlet property="googleButton" destination="lSg-eX-kJ0" id="0yu-kK-iqw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="886.95652173913049" y="77.678571428571431"/>
         </scene>
-        <!--City-->
+        <!--NWeatherApp-->
         <scene sceneID="dto-hT-oL3">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="kGJ-AN-eVN" customClass="WeatherViewController" customModule="NWeatherApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -139,17 +139,26 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hio-J1-1hC">
-                                <rect key="frame" x="0.0" y="139" width="414" height="46"/>
+                                <rect key="frame" x="0.0" y="183" width="414" height="46"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="35"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25°C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3m-tg-GmR">
-                                <rect key="frame" x="0.0" y="210" width="414" height="65"/>
+                                <rect key="frame" x="0.0" y="254" width="414" height="65"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="50"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D4D-ef-9Mx">
+                                <rect key="frame" x="327" y="121" width="67" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <segue destination="qVC-Jd-a1q" kind="push" identifier="goToGoogleMaps" id="Apt-Ue-Jol"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="TdS-oL-7BI"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -166,7 +175,7 @@
                             <constraint firstItem="TAE-DU-siV" firstAttribute="leading" secondItem="TdS-oL-7BI" secondAttribute="leading" id="z3X-5T-hi5"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="City" id="oLS-4d-sOI"/>
+                    <navigationItem key="navigationItem" title="NWeatherApp" id="oLS-4d-sOI"/>
                     <connections>
                         <outlet property="backgroundImage" destination="TAE-DU-siV" id="vTe-QJ-9eX"/>
                         <outlet property="cityLabel" destination="Hio-J1-1hC" id="mUE-lO-eff"/>
@@ -177,21 +186,57 @@
             </objects>
             <point key="canvasLocation" x="1650.7246376811595" y="78.348214285714278"/>
         </scene>
+        <!--GoogleMaps-->
+        <scene sceneID="Nvl-QO-Ik2">
+            <objects>
+                <viewController id="qVC-Jd-a1q" customClass="GoogleMapViewController" customModule="NWeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5sR-rC-UJq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tns-mS-eoR" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="qsh-qI-ZsE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Tns-mS-eoR" firstAttribute="leading" secondItem="qsh-qI-ZsE" secondAttribute="leading" id="5Jd-xu-hBR"/>
+                            <constraint firstItem="Tns-mS-eoR" firstAttribute="top" secondItem="qsh-qI-ZsE" secondAttribute="top" id="MVr-YT-9Dg"/>
+                            <constraint firstItem="Tns-mS-eoR" firstAttribute="trailing" secondItem="qsh-qI-ZsE" secondAttribute="trailing" id="WtW-qM-WRJ"/>
+                            <constraint firstAttribute="bottom" secondItem="Tns-mS-eoR" secondAttribute="bottom" id="njL-BO-ryQ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="GoogleMaps" id="Mjy-Ah-5Qc"/>
+                    <connections>
+                        <outlet property="googleMapView" destination="Tns-mS-eoR" id="G2Z-DM-B6E"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3uf-4S-S6W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2402.898550724638" y="77.678571428571431"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="NLj-7T-q3W">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4P0-a1-yCV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8TH-Id-c8u" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cla-ki-QRG">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <navigationBarAppearance key="compactScrollEdgeAppearance"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="eOJ-6O-Qat"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4P0-a1-yCV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-23.188405797101453" y="77.678571428571431"/>
         </scene>
@@ -201,5 +246,8 @@
         <image name="googleLogo-29" width="29" height="29"/>
         <image name="greenLeavesBackground" width="2736" height="5927"/>
         <image name="riverMountainBackground" width="4368" height="6639"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
