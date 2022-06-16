@@ -21,8 +21,7 @@ class WelcomeViewController: UIViewController {
         
         //Load random background image
         randomBackgroundImage()
-        googleButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 0)
-        googleButton.contentHorizontalAlignment = .center
+
         //LogOut from Facebook on load
         LoginManager().logOut()
         
