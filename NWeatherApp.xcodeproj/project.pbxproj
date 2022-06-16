@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		339E61EF864ACF4E6F1C155C /* Pods_NWeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 218EC00745B61ADC2C99EB67 /* Pods_NWeatherApp.framework */; };
+		9A158157285B535400269A2A /* GoogleMapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A158156285B535400269A2A /* GoogleMapsViewController.swift */; };
+		9A158159285B546600269A2A /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A158158285B546600269A2A /* SearchResultViewController.swift */; };
 		9A5EFBDA285A8689003B632C /* GoogleMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5EFBD9285A8689003B632C /* GoogleMapViewController.swift */; };
 		9A92A3DE2859106B004FCF87 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A92A3DD2859106B004FCF87 /* WelcomeViewController.swift */; };
 		9A92A3E02859107A004FCF87 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A92A3DF2859107A004FCF87 /* Constants.swift */; };
@@ -24,6 +26,8 @@
 		218EC00745B61ADC2C99EB67 /* Pods_NWeatherApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NWeatherApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6511CB5D65A5E330F08D52EC /* Pods-NWeatherApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NWeatherApp.release.xcconfig"; path = "Target Support Files/Pods-NWeatherApp/Pods-NWeatherApp.release.xcconfig"; sourceTree = "<group>"; };
 		7B584EAF2A87541CD86486A0 /* Pods-NWeatherApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NWeatherApp.debug.xcconfig"; path = "Target Support Files/Pods-NWeatherApp/Pods-NWeatherApp.debug.xcconfig"; sourceTree = "<group>"; };
+		9A158156285B535400269A2A /* GoogleMapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapsViewController.swift; sourceTree = "<group>"; };
+		9A158158285B546600269A2A /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		9A5EFBD9285A8689003B632C /* GoogleMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapViewController.swift; sourceTree = "<group>"; };
 		9A92A3DD2859106B004FCF87 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		9A92A3DF2859107A004FCF87 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -89,6 +93,8 @@
 				9A92A3DD2859106B004FCF87 /* WelcomeViewController.swift */,
 				9AEF79EA28590CF6002DC18F /* WeatherViewController.swift */,
 				9A5EFBD9285A8689003B632C /* GoogleMapViewController.swift */,
+				9A158156285B535400269A2A /* GoogleMapsViewController.swift */,
+				9A158158285B546600269A2A /* SearchResultViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -281,7 +287,9 @@
 				9A92A3E02859107A004FCF87 /* Constants.swift in Sources */,
 				9AEF79EB28590CF6002DC18F /* WeatherViewController.swift in Sources */,
 				9A92A3DE2859106B004FCF87 /* WelcomeViewController.swift in Sources */,
+				9A158157285B535400269A2A /* GoogleMapsViewController.swift in Sources */,
 				9AEF79E728590CF6002DC18F /* AppDelegate.swift in Sources */,
+				9A158159285B546600269A2A /* SearchResultViewController.swift in Sources */,
 				9AEF79E928590CF6002DC18F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,6 +9,10 @@ import UIKit
 import GoogleMaps
 
 class GoogleMapViewController: UIViewController {
+    func updateSearchResults(for searchController: UISearchController) {
+        
+    }
+    
 
     @IBOutlet weak var googleMapView: GMSMapView!
     //@IBOutlet weak var txtSearch: UITextField!
@@ -16,8 +20,15 @@ class GoogleMapViewController: UIViewController {
 //    @IBAction func locationTapped(_ sender: Any) {
 //        gotoPlaces()
 //    }
+    
+    let searchVC = UISearchController(searchResultsController: SearchResultViewController())
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+//        searchVC.searchResultsUpdater = self
+//        searchVC.searchBar.backgroundColor = .systemMint
+//        navigationItem.searchController = searchVC
 
         // Do any additional setup after loading the view.
         // GOOGLE MAPS SDK: COMPASS
