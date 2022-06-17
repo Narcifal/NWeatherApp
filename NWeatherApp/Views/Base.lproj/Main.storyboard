@@ -140,31 +140,13 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25°C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3m-tg-GmR">
-                                <rect key="frame" x="0.0" y="195" width="414" height="65"/>
+                                <rect key="frame" x="0.0" y="220" width="414" height="65"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="50"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Yqd-uu-Daf">
-                                <rect key="frame" x="20" y="639" width="374" height="223"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="223" id="nqI-Dm-38b"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hio-J1-1hC">
-                                <rect key="frame" x="0.0" y="132" width="414" height="46"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="35"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5JO-T0-Cmr">
-                                <rect key="frame" x="20" y="293" width="374" height="152"/>
+                                <rect key="frame" x="20" y="311" width="374" height="152"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4Tf-w0-Kmr">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="152"/>
@@ -186,17 +168,46 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Yqd-uu-Daf">
+                                <rect key="frame" x="20" y="471" width="374" height="391"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="391" id="nqI-Dm-38b"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hio-J1-1hC">
+                                <rect key="frame" x="0.0" y="152" width="414" height="46"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="35"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="clh-Fp-I0I">
+                                <rect key="frame" x="183.5" y="104" width="47" height="31"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="paperplane.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="locationPressed:" destination="kGJ-AN-eVN" eventType="touchUpInside" id="a6V-lE-txx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="TdS-oL-7BI"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Yqd-uu-Daf" firstAttribute="top" secondItem="5JO-T0-Cmr" secondAttribute="bottom" constant="194" id="4wc-8J-PpR"/>
+                            <constraint firstItem="Hio-J1-1hC" firstAttribute="top" secondItem="clh-Fp-I0I" secondAttribute="bottom" constant="17" id="12z-Ca-AwR"/>
+                            <constraint firstItem="Yqd-uu-Daf" firstAttribute="top" secondItem="5JO-T0-Cmr" secondAttribute="bottom" constant="8" id="4wc-8J-PpR"/>
+                            <constraint firstItem="clh-Fp-I0I" firstAttribute="top" secondItem="TdS-oL-7BI" secondAttribute="top" constant="16" id="66M-qG-OfL"/>
                             <constraint firstItem="TdS-oL-7BI" firstAttribute="trailing" secondItem="Yqd-uu-Daf" secondAttribute="trailing" constant="20" id="F1f-6H-30X"/>
                             <constraint firstItem="Yqd-uu-Daf" firstAttribute="leading" secondItem="TdS-oL-7BI" secondAttribute="leading" constant="20" id="MfR-eb-KBZ"/>
                             <constraint firstItem="TdS-oL-7BI" firstAttribute="trailing" secondItem="Yqd-uu-Daf" secondAttribute="trailing" constant="20" id="Mfa-Vy-kOO"/>
                             <constraint firstItem="TdS-oL-7BI" firstAttribute="trailing" secondItem="5JO-T0-Cmr" secondAttribute="trailing" constant="20" id="PnA-u7-eCH"/>
                             <constraint firstItem="Yqd-uu-Daf" firstAttribute="bottom" secondItem="TdS-oL-7BI" secondAttribute="bottom" id="TEf-S8-wDR"/>
-                            <constraint firstItem="5JO-T0-Cmr" firstAttribute="top" secondItem="r3m-tg-GmR" secondAttribute="bottom" constant="33" id="U5J-m1-eda"/>
+                            <constraint firstItem="5JO-T0-Cmr" firstAttribute="top" secondItem="r3m-tg-GmR" secondAttribute="bottom" constant="26" id="U5J-m1-eda"/>
                             <constraint firstItem="Yqd-uu-Daf" firstAttribute="leading" secondItem="TdS-oL-7BI" secondAttribute="leading" constant="20" id="WYD-uz-sou"/>
                             <constraint firstItem="Hio-J1-1hC" firstAttribute="leading" secondItem="TdS-oL-7BI" secondAttribute="leading" id="XRF-4s-Jyu"/>
                             <constraint firstItem="5JO-T0-Cmr" firstAttribute="leading" secondItem="TdS-oL-7BI" secondAttribute="leading" constant="20" id="bCn-XZ-aHd"/>
@@ -204,15 +215,16 @@
                             <constraint firstItem="TdS-oL-7BI" firstAttribute="trailing" secondItem="5JO-T0-Cmr" secondAttribute="trailing" constant="20" id="g2l-kP-WRr"/>
                             <constraint firstItem="r3m-tg-GmR" firstAttribute="trailing" secondItem="TdS-oL-7BI" secondAttribute="trailing" id="gUN-DQ-6d9"/>
                             <constraint firstItem="5JO-T0-Cmr" firstAttribute="leading" secondItem="TdS-oL-7BI" secondAttribute="leading" constant="20" id="iQg-W9-AvO"/>
-                            <constraint firstItem="Hio-J1-1hC" firstAttribute="top" secondItem="TdS-oL-7BI" secondAttribute="top" constant="44" id="mH4-nv-ljY"/>
+                            <constraint firstItem="clh-Fp-I0I" firstAttribute="leading" secondItem="TdS-oL-7BI" secondAttribute="leading" constant="183.5" id="mGG-VR-lY4"/>
+                            <constraint firstItem="TdS-oL-7BI" firstAttribute="trailing" secondItem="clh-Fp-I0I" secondAttribute="trailing" constant="183.5" id="uCP-1n-4OQ"/>
                             <constraint firstItem="Hio-J1-1hC" firstAttribute="trailing" secondItem="TdS-oL-7BI" secondAttribute="trailing" id="yCj-hp-lzo"/>
-                            <constraint firstItem="r3m-tg-GmR" firstAttribute="top" secondItem="Hio-J1-1hC" secondAttribute="bottom" constant="17" id="zFa-yC-Vi8"/>
+                            <constraint firstItem="r3m-tg-GmR" firstAttribute="top" secondItem="Hio-J1-1hC" secondAttribute="bottom" constant="22" id="zFa-yC-Vi8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="oLS-4d-sOI">
                         <nil key="title"/>
                         <textField key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search by name" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" id="pai-fu-AVh">
-                            <rect key="frame" x="105.5" y="5" width="203" height="34"/>
+                            <rect key="frame" x="88.5" y="5" width="237" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -315,6 +327,7 @@
         <image name="globe.asia.australia" catalog="system" width="128" height="121"/>
         <image name="googleLogo-29" width="29" height="29"/>
         <image name="greenLeavesBackground" width="2736" height="5927"/>
+        <image name="paperplane.fill" catalog="system" width="32" height="32"/>
         <image name="riverMountainBackground" width="4368" height="6639"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

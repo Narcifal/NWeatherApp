@@ -13,22 +13,11 @@ class GoogleMapViewController: UIViewController {
         
     }
     
-
     @IBOutlet weak var googleMapView: GMSMapView!
-    //@IBOutlet weak var txtSearch: UITextField!
-    
-//    @IBAction func locationTapped(_ sender: Any) {
-//        gotoPlaces()
-//    }
-    
-    //let searchVC = UISearchController(searchResultsController: SearchResultViewController())
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        searchVC.searchResultsUpdater = self
-//        searchVC.searchBar.backgroundColor = .systemMint
-//        navigationItem.searchController = searchVC
 
         // Do any additional setup after loading the view.
         // GOOGLE MAPS SDK: COMPASS
@@ -38,13 +27,6 @@ class GoogleMapViewController: UIViewController {
         googleMapView.isMyLocationEnabled = true
         googleMapView.settings.myLocationButton = true
     }
-    
-//    func gotoPlaces() {
-//        txtSearch.resignFirstResponder()
-//        let acController = GMSAutocompleteViewController()
-//        acController.delegate = self
-//        present(acController, animated: true, completion: nil)
-//    }
 }
 
 extension GoogleMapViewController: CLLocationManagerDelegate {

@@ -2,7 +2,7 @@ import Foundation
 import CoreLocation
 
 protocol WeatherManagerDelegate {
-    func didUpdateWeather(_ weatherManager: WeatherManager, data: WeatherNameData, cityName: String)
+    func didUpdateWeather(_ weatherManager: WeatherManager, data: WeatherNameData)
     func didFailWithError(error: Error)
 }
 
@@ -17,11 +17,11 @@ struct WeatherManager {
         performCoordRequest(with: urlString)
     }
     
-    func fetchWeather(latitude: Double, longitude: Double, name: String) {
+    func fetchWeather(latitude: Double, longitude: Double) {
         let weatherURL = "https://api.openweathermap.org/data/2.5/onecall?&exclude=minutely&appid=5534e7ad1f66c1cab452285dbbfe4303&units=metric"
         let urlString = "\(weatherURL)&lat=\(latitude)&lon=\(longitude)"
 
-        performWeatherRequest(with: urlString, cityName: name)
+        performWeatherRequest(with: urlString)
     }
     
     func performCoordRequest(with urlString: String) {
@@ -34,7 +34,7 @@ struct WeatherManager {
                 }
                 if let safeData = data {
                     if let receivedCoord = self.parseCoordJSON(safeData) {
-                        fetchWeather(latitude: receivedCoord.coord.lat, longitude: receivedCoord.coord.lon, name: receivedCoord.name)
+                        fetchWeather(latitude: receivedCoord.coord.lat, longitude: receivedCoord.coord.lon)
                     }
                 }
             }
@@ -58,7 +58,7 @@ struct WeatherManager {
     
     //---------------------------------------------------------------------
     
-    func performWeatherRequest(with urlString: String, cityName: String) {
+    func performWeatherRequest(with urlString: String) {
         
         if let url = URL(string: urlString) {
             let session = URLSession(configuration: .default)
@@ -69,7 +69,7 @@ struct WeatherManager {
                 }
                 if let safeData = data {
                     if let receivedWeather = self.parseWeatherDataJSON(safeData) {
-                        self.delegate?.didUpdateWeather(self, data: receivedWeather, cityName: cityName)
+                        self.delegate?.didUpdateWeather(self, data: receivedWeather)
                     }
                 }
             }

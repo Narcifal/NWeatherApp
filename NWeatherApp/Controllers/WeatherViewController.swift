@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class WeatherViewController: UIViewController {
 
@@ -25,11 +26,12 @@ class WeatherViewController: UIViewController {
     
     
     var weatherManager = WeatherManager()
+    var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        randomBackgroundImage()
+
+        //randomBackgroundImage()
 
         hourlyCollection.register(HourlyCollectionViewCell.nib(), forCellWithReuseIdentifier: "HourlyCollectionViewCell")
         
@@ -44,9 +46,17 @@ class WeatherViewController: UIViewController {
         tableView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
 
         weatherManager.delegate = self
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
+        
         searchBar.delegate = self
-        //searchBar.layer.borderColor = UIColor.white.cgColor
         searchBar.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+        searchBar.layer.cornerRadius = 12.0
+        searchBar.clipsToBounds = true
+        
+        backgroundImage.image = UIImage(named: Constants.BackgroundImage.greenLeaves)
+        backgroundImage.alpha = 0.7
     }
 
     func randomBackgroundImage() {
@@ -71,7 +81,6 @@ class WeatherViewController: UIViewController {
         
         backgroundImage.alpha = 0.7
     }
-
 }
 
 extension WeatherViewController: UICollectionViewDelegate {
@@ -124,9 +133,9 @@ extension WeatherViewController: UITableViewDataSource {
 
 extension WeatherViewController: UITextFieldDelegate {
     
-    @IBAction func searchPressed(_ sender: UIButton) {
-        searchBar.endEditing(true)
-    }
+//    @IBAction func searchPressed(_ sender: UIButton) {
+//        searchBar.endEditing(true)
+//    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchBar.endEditing(true)
@@ -137,7 +146,7 @@ extension WeatherViewController: UITextFieldDelegate {
         if textField.text != "" {
             return true
         } else {
-            textField.placeholder = "Type something"
+            textField.placeholder = "Enter city name"
             return false
         }
     }
@@ -154,15 +163,39 @@ extension WeatherViewController: UITextFieldDelegate {
 
 extension WeatherViewController: WeatherManagerDelegate {
     
-    func didUpdateWeather(_ weatherManager: WeatherManager, data: WeatherNameData, cityName: String) {
+    func didUpdateWeather(_ weatherManager: WeatherManager, data: WeatherNameData) {
         DispatchQueue.main.async {
-            self.cityLabel.text = cityName
+            self.cityLabel.text = data.timezone
             self.temperatureLabel.text = String(format: "%.1f", data.current.temp)
             //self.conditionImageView.image = UIImage(systemName: setWeather().conditionName(conditionId: data.current.weather[0].id))
         }
     }
     
     func didFailWithError(error: Error) {
+        print(error)
+    }
+}
+
+//MARK: - CLLocationManagerDelegate
+
+
+extension WeatherViewController: CLLocationManagerDelegate {
+    
+    @IBAction func locationPressed(_ sender: UIButton) {
+        locationManager.requestLocation()
+        locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            //locationManager.stopUpdatingLocation()
+            let lat = location.coordinate.latitude
+            let lon = location.coordinate.longitude
+            weatherManager.fetchWeather(latitude: lat, longitude: lon)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
     }
 }

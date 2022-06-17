@@ -4,6 +4,7 @@ struct WeatherNameData: Codable {
     let hourly: [Hourly]
     let daily: [Daily]
     let current: Current
+    let timezone: String
 }
 
 struct Hourly: Codable {
