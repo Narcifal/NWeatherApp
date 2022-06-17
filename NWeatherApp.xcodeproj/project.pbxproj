@@ -84,8 +84,8 @@
 		9A5EFBD8285A7C47003B632C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				9A89CD48285CC887000239A4 /* WeatherCoordinatesData.swift */,
 				9A89CD46285CC887000239A4 /* WeatherManager.swift */,
+				9A89CD48285CC887000239A4 /* WeatherCoordinatesData.swift */,
 				9A89CD47285CC887000239A4 /* WeatherNameData.swift */,
 				9A89CD4C285CCD38000239A4 /* HourlyCollectionViewCell.swift */,
 				9A89CD4D285CCD38000239A4 /* HourlyCollectionViewCell.xib */,

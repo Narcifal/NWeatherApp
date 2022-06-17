@@ -2,6 +2,7 @@ import Foundation
 
 struct WeatherCoordinatesData: Codable {
     let coord: Coord
+    let name: String
 }
 
 struct Coord: Codable {
