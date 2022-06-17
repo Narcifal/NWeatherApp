@@ -192,7 +192,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="paperplane.fill" catalog="system"/>
                                 <connections>
-                                    <action selector="locationPressed:" destination="kGJ-AN-eVN" eventType="touchUpInside" id="a6V-lE-txx"/>
+                                    <action selector="weatherByCurrentLocation:" destination="kGJ-AN-eVN" eventType="touchUpInside" id="dyz-qG-UuG"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -261,7 +261,7 @@
         <!--GoogleMaps-->
         <scene sceneID="Nvl-QO-Ik2">
             <objects>
-                <viewController id="qVC-Jd-a1q" customClass="GoogleMapViewController" customModule="NWeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="qVC-Jd-a1q" customClass="MapViewController" customModule="NWeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5sR-rC-UJq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -310,7 +310,9 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="yDv-fd-zgu"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="googleMapView" destination="Tns-mS-eoR" id="G2Z-DM-B6E"/>
+                        <outlet property="addressLabel" destination="XMQ-09-NKA" id="3hW-fz-jm8"/>
+                        <outlet property="mapCenterPinImage" destination="TcS-TP-isF" id="jHx-5E-t1M"/>
+                        <outlet property="mapView" destination="Tns-mS-eoR" id="W47-Zj-vfP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3uf-4S-S6W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

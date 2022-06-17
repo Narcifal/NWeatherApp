@@ -24,6 +24,11 @@ class WeatherViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UITextField!
     
+    @IBAction func currentLocation(_ sender: UIButton) {
+    }
+    
+    var myLonLocation: CLLocationDegrees = 0.0
+    var myLatLocation: CLLocationDegrees = 0.0
     
     var weatherManager = WeatherManager()
     var locationManager = CLLocationManager()
@@ -46,9 +51,6 @@ class WeatherViewController: UIViewController {
         tableView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
 
         weatherManager.delegate = self
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.requestLocation()
         
         searchBar.delegate = self
         searchBar.backgroundColor = UIColor.white.withAlphaComponent(0.3)
@@ -57,8 +59,28 @@ class WeatherViewController: UIViewController {
         
         backgroundImage.image = UIImage(named: Constants.BackgroundImage.greenLeaves)
         backgroundImage.alpha = 0.7
+        
+        getCurrentLocation()
+    }
+    
+    func getCurrentLocation() {
+        // Ask for Authorisation from the User.
+        self.locationManager.requestAlwaysAuthorization()
+
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.startUpdatingLocation()
+        }
     }
 
+    
+    @IBAction func weatherByCurrentLocation(_ sender: UIButton) {
+        weatherManager.fetchWeather(latitude: myLonLocation, longitude: myLatLocation)
+    }
+    
     func randomBackgroundImage() {
         let randomNumber = Int.random(in: 0..<6)
         
@@ -82,6 +104,8 @@ class WeatherViewController: UIViewController {
         backgroundImage.alpha = 0.7
     }
 }
+
+
 
 extension WeatherViewController: UICollectionViewDelegate {
     
@@ -108,6 +132,8 @@ extension WeatherViewController: UICollectionViewDataSource {
     
 }
 
+
+
 extension WeatherViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped cell number \(indexPath.row).")
@@ -129,13 +155,13 @@ extension WeatherViewController: UITableViewDataSource {
         }
 }
 
+
+
+
+
 //MARK: - UITextFieldDelegate
 
 extension WeatherViewController: UITextFieldDelegate {
-    
-//    @IBAction func searchPressed(_ sender: UIButton) {
-//        searchBar.endEditing(true)
-//    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchBar.endEditing(true)
@@ -176,26 +202,11 @@ extension WeatherViewController: WeatherManagerDelegate {
     }
 }
 
-//MARK: - CLLocationManagerDelegate
-
-
 extension WeatherViewController: CLLocationManagerDelegate {
-    
-    @IBAction func locationPressed(_ sender: UIButton) {
-        locationManager.requestLocation()
-        locationManager.startUpdatingLocation()
-    }
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            //locationManager.stopUpdatingLocation()
-            let lat = location.coordinate.latitude
-            let lon = location.coordinate.longitude
-            weatherManager.fetchWeather(latitude: lat, longitude: lon)
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
+           guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        myLatLocation = locValue.latitude
+        myLonLocation = locValue.longitude
+        weatherManager.fetchWeather(latitude: locValue.latitude, longitude: locValue.longitude)
     }
 }

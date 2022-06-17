@@ -34,7 +34,7 @@ class MapViewController: UIViewController {
                                           bottom: labelHeight, right: 0)
       
       UIView.animate(withDuration: 0.25) {
-        self.pinImageVerticalConstraint.constant = ((labelHeight - self.view.safeAreaInsets.top) * 0.5)
+//        self.pinImageVerticalConstraint.constant = ((labelHeight - self.view.safeAreaInsets.top) * 0.5)
         self.view.layoutIfNeeded()
       }
     }

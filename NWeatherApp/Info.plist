@@ -49,5 +49,13 @@
 			</array>
 		</dict>
 	</dict>
+    
+    
+    <key>NSLocationAlwaysUsageDescription</key>
+        <string>Your location is not needed. This request has popped up due to a 3rd party framework used by the app in a context that does NOT need you to reveal you location.</string>
+        <key>NSLocationWhenInUseUsageDescription</key>
+        <string>Your location is not needed. This request has popped up due to a 3rd party framework used by the app in a context that does NOT need you to reveal you location.</string>
+        <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+        <string>Your location is not needed. This request has popped up due to a 3rd party framework used by the app in a context that does NOT need you to reveal you location.</string>
 </dict>
 </plist>
