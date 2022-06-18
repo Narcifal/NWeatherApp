@@ -8,31 +8,31 @@
 import UIKit
 import CoreLocation
 
-class WeatherViewController: UIViewController {
+final class WeatherViewController: UIViewController {
 
     //City label
-    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet private weak var cityLabel: UILabel!
     //Temperature label
-    @IBOutlet weak var temperatureLabel: UILabel!
+    @IBOutlet private weak var temperatureLabel: UILabel!
     //Hourly weather view
-    @IBOutlet weak var hourlyView: UIView!
+    @IBOutlet private weak var hourlyView: UIView!
     //Hourly weather collection
-    @IBOutlet weak var hourlyCollection: UICollectionView!
+    @IBOutlet private weak var hourlyCollection: UICollectionView!
     //WeatherViewController background image
-    @IBOutlet weak var backgroundImage: UIImageView!
+    @IBOutlet private weak var backgroundImage: UIImageView!
     //Daily table view
-    @IBOutlet weak var dailyView: UITableView!
+    @IBOutlet private weak var dailyView: UITableView!
     //Search weathe textField
-    @IBOutlet weak var searchWeather: UITextField!
+    @IBOutlet private weak var searchWeather: UITextField!
     
-    var userCoordLatitude: CLLocationDegrees = 0.0
-    var userCoordLongitude: CLLocationDegrees = 0.0
+    private var userCoordLatitude: CLLocationDegrees = 0.0
+    private var userCoordLongitude: CLLocationDegrees = 0.0
     
     //Recieved weather data
-    var recievedWeatherData: WeatherNameData? = nil
+    private var recievedWeatherData: WeatherNameData? = nil
     
-    var weatherManager = WeatherManager()
-    var locationManager = CLLocationManager()
+    private var weatherManager = WeatherManager()
+    private var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +74,28 @@ class WeatherViewController: UIViewController {
 
     }
     
+    func configure(with data: WeatherNameData) {
+        self.recievedWeatherData = data
+        
+        self.cityLabel.text = data.timezone
+        self.temperatureLabel.text = String(format: "%.1f", data.current.temp)
+        
+        //Reload data to change view values
+        self.dailyView.reloadData()
+        self.hourlyCollection.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "goToGoogleMaps") {
+            let mapViewController = segue.destination as? MapViewController
+
+            mapViewController?.didUpdateWeather = { [weak self] weather in
+                guard let weather = weather else { return }
+                self?.configure(with: weather)
+            }
+        }
+    }
+    
     //Method to get user location
     func getCurrentLocation() {
         // Ask for Authorisation from the User.
@@ -86,7 +108,6 @@ class WeatherViewController: UIViewController {
             locationManager.delegate = self
             locationManager.startUpdatingLocation()
         }
-    
     }
     
     //Search weather data for your location
@@ -162,23 +183,24 @@ extension WeatherViewController: UICollectionViewDataSource {
             withReuseIdentifier: "HourlyCollectionViewCell",
             for: indexPath) as! HourlyCollectionViewCell
         
-//        let date = NSDate(timeIntervalSince1970: TimeInterval((recievedWeatherData?.hourly[0].dt) ?? 0))
-//        print("tableview2")
-//
-//        print(date)
-//
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "HH:mm"
-//        let currentTime = formatter.string(from: date as Date)
-//        print(currentTime)
-//        let temp = String(format: "%.1f", recievedWeatherData?.hourly[0].temp ?? 0)
-//        print(temp)
-//        let celsiusTemp = "\(temp)\(Constants.degreeCelsius)"
-//
-//        cell.configure(image: UIImage(named: "facebookLogo-40")!,
-//                       time: currentTime,
-//                       temperature: celsiusTemp)
+        let date = NSDate(timeIntervalSince1970: TimeInterval((recievedWeatherData?.hourly[indexPath.item].dt) ?? 0))
+        print("tableview2")
 
+        print(date)
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        let currentTime = formatter.string(from: date as Date)
+        print(currentTime)
+        let temp = String(format: "%.1f", recievedWeatherData?.hourly[indexPath.item].temp ?? 0)
+        print(temp)
+        let celsiusTemp = "\(temp)\(Constants.degreeCelsius)"
+
+        cell.configure(image: UIImage(named: "facebookLogo-40")!,
+                       time: currentTime,
+                       temperature: celsiusTemp)
+
+        
         return cell
     }
      
@@ -208,21 +230,21 @@ extension WeatherViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "DailyTableViewCell", for: indexPath) as! DailyTableViewCell
-            
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "HH:mm"
-//        let currentTime = formatter.string(from: date as Date)
-//        print(currentTime)
-//        let min = String(format: "%.1f", recievedWeatherData?.daily[0].temp.min ?? 0)
-//        let max = String(format: "%.1f", recievedWeatherData?.daily[0].temp.max ?? 0)
-//
-//        let maxTemp = "Max: \(max)"
-//        let minTemp = "Min: \(min)"
-//
-//        let date = NSDate(timeIntervalSinceReferenceDate: (recievedWeatherData?.daily[0].dt ?? 0))
-//        let weatherDay = DateFormatter().string(from: date as Date)
-//
-//        cell.configure(image: UIImage(named: "googleLogo-40")!, day: "Tue", max: maxTemp, min: minTemp)
+        
+        let date = NSDate(timeIntervalSinceReferenceDate: (recievedWeatherData?.daily[indexPath.row].dt ?? 0))
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        let currentTime = formatter.string(from: date as Date)
+        print(currentTime)
+        let min = String(format: "%.1f", recievedWeatherData?.daily[indexPath.row].temp.min ?? 0)
+        let max = String(format: "%.1f", recievedWeatherData?.daily[indexPath.row].temp.max ?? 0)
+
+        let maxTemp = "Max: \(max)"
+        let minTemp = "Min: \(min)"
+
+        let weatherDay = DateFormatter().string(from: date as Date)
+
+        cell.configure(image: UIImage(named: "googleLogo-40")!, day: weatherDay, max: maxTemp, min: minTemp)
         
         cell.layer.backgroundColor = UIColor.clear.cgColor
         
@@ -267,20 +289,14 @@ extension WeatherViewController: WeatherManagerDelegate {
     //Protocol method, loaded when we decode the data
     func didUpdateWeather(_ weatherManager: WeatherManager, data: WeatherNameData) {
         DispatchQueue.main.async {
-            self.recievedWeatherData = data
-            
-            self.cityLabel.text = data.timezone
-            self.temperatureLabel.text = String(format: "%.1f", data.current.temp)
-            
-            //Reload data to change view values
-            self.dailyView.reloadData()
-            self.hourlyCollection.reloadData()
+            self.configure(with: data)
         }
     }
     
     func didFailWithError(error: Error) {
         print(error)
     }
+    
 }
 
 
@@ -292,6 +308,7 @@ extension WeatherViewController: CLLocationManagerDelegate {
 
         userCoordLongitude = locValue.longitude
         userCoordLatitude = locValue.latitude
+        
         //Call fetchWeather method to load weather data
         weatherManager.fetchWeather(latitude: locValue.latitude, longitude: locValue.longitude)
     }

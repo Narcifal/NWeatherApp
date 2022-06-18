@@ -240,7 +240,8 @@
                         <barButtonItem key="rightBarButtonItem" title="Item" image="globe.asia.australia" catalog="system" id="Pg1-R2-Sta">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="qVC-Jd-a1q" kind="push" id="j6x-fV-xpb"/>
+                                <action selector="googleMapsButton:" destination="kGJ-AN-eVN" id="XXg-ac-Xc5"/>
+                                <segue destination="qVC-Jd-a1q" kind="push" identifier="goToGoogleMaps" id="Y5y-ie-j8x"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -277,30 +278,34 @@
                                     <constraint firstAttribute="width" constant="65" id="ec6-2r-rbN"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQ4-Hr-7uB">
-                                <rect key="frame" x="0.0" y="819" width="414" height="43"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a city" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQ4-Hr-7uB">
+                                <rect key="frame" x="0.0" y="88" width="414" height="50"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="gQX-wP-pJs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qsh-qI-ZsE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Tns-mS-eoR" firstAttribute="leading" secondItem="qsh-qI-ZsE" secondAttribute="leading" id="6aM-wM-Cvo"/>
-                            <constraint firstItem="Tns-mS-eoR" firstAttribute="trailing" secondItem="qsh-qI-ZsE" secondAttribute="trailing" id="7lI-rJ-tci"/>
-                            <constraint firstItem="TcS-TP-isF" firstAttribute="centerY" secondItem="5sR-rC-UJq" secondAttribute="centerY" id="CsL-BW-qcZ"/>
-                            <constraint firstItem="tQ4-Hr-7uB" firstAttribute="trailing" secondItem="qsh-qI-ZsE" secondAttribute="trailing" id="FmO-Mq-6ch"/>
-                            <constraint firstItem="tQ4-Hr-7uB" firstAttribute="leading" secondItem="qsh-qI-ZsE" secondAttribute="leading" id="IXf-6F-ggz"/>
-                            <constraint firstItem="TcS-TP-isF" firstAttribute="centerX" secondItem="5sR-rC-UJq" secondAttribute="centerX" id="KoE-ug-qqd"/>
-                            <constraint firstItem="Tns-mS-eoR" firstAttribute="top" secondItem="qsh-qI-ZsE" secondAttribute="top" id="Vu3-Uh-KVH"/>
-                            <constraint firstItem="qsh-qI-ZsE" firstAttribute="bottom" secondItem="tQ4-Hr-7uB" secondAttribute="bottom" id="alA-4y-VRa"/>
-                            <constraint firstItem="Tns-mS-eoR" firstAttribute="bottom" secondItem="qsh-qI-ZsE" secondAttribute="bottom" id="mZZ-dt-zd1"/>
+                            <constraint firstItem="tQ4-Hr-7uB" firstAttribute="trailing" secondItem="qsh-qI-ZsE" secondAttribute="trailing" id="8gm-Qf-01z"/>
+                            <constraint firstItem="TcS-TP-isF" firstAttribute="centerY" secondItem="5sR-rC-UJq" secondAttribute="centerY" id="9rp-Be-6K2"/>
+                            <constraint firstItem="tQ4-Hr-7uB" firstAttribute="top" secondItem="qsh-qI-ZsE" secondAttribute="top" id="CRV-cd-b8f"/>
+                            <constraint firstItem="Tns-mS-eoR" firstAttribute="top" secondItem="qsh-qI-ZsE" secondAttribute="top" id="IpG-3S-aMx"/>
+                            <constraint firstItem="tQ4-Hr-7uB" firstAttribute="leading" secondItem="qsh-qI-ZsE" secondAttribute="leading" id="NNx-DI-jTv"/>
+                            <constraint firstItem="Tns-mS-eoR" firstAttribute="leading" secondItem="qsh-qI-ZsE" secondAttribute="leading" id="OJW-FZ-EGd"/>
+                            <constraint firstItem="Tns-mS-eoR" firstAttribute="trailing" secondItem="qsh-qI-ZsE" secondAttribute="trailing" id="TPI-8J-3QS"/>
+                            <constraint firstItem="Tns-mS-eoR" firstAttribute="bottom" secondItem="qsh-qI-ZsE" secondAttribute="bottom" id="s7s-sp-dWh"/>
+                            <constraint firstItem="TcS-TP-isF" firstAttribute="centerX" secondItem="5sR-rC-UJq" secondAttribute="centerX" id="vOI-DQ-O9a"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="GoogleMaps" id="Mjy-Ah-5Qc">
                         <barButtonItem key="backBarButtonItem" title="Back" id="yDv-fd-zgu"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="HJp-6v-Nk6">
+                        <barButtonItem key="rightBarButtonItem" title="Search" id="HJp-6v-Nk6">
                             <connections>
                                 <action selector="getWeatherButton:" destination="qVC-Jd-a1q" id="4Dy-Q1-jY0"/>
                             </connections>
@@ -308,7 +313,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addressLabel" destination="tQ4-Hr-7uB" id="DXu-nT-61z"/>
-                        <outlet property="mapView" destination="Tns-mS-eoR" id="yQI-tN-uiA"/>
+                        <outlet property="mapView" destination="Tns-mS-eoR" id="P20-b1-4L4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3uf-4S-S6W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
