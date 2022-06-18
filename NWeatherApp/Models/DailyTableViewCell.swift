@@ -27,8 +27,11 @@ class DailyTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    public func configure(with image: UIImage) {
+    public func configure(image: UIImage, day: String, max: String, min: String) {
         weatherImage.image = image
+        dayLabel.text = day
+        minTemp.text = min
+        maxTemp.text = max
     }
     
     static func nib() -> UINib {

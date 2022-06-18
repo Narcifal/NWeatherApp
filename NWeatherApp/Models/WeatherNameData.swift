@@ -19,6 +19,7 @@ struct Current: Codable {
 }
 
 struct Daily: Codable {
+    let dt: TimeInterval
     let temp: Temp
     let weather: [Weather]
 }

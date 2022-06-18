@@ -10,23 +10,25 @@ import CoreLocation
 
 class WeatherViewController: UIViewController {
 
+    //City label
     @IBOutlet weak var cityLabel: UILabel!
-    
+    //Temperature label
     @IBOutlet weak var temperatureLabel: UILabel!
-    
+    //Hourly weather view
     @IBOutlet weak var hourlyView: UIView!
-    
+    //Hourly weather collection
     @IBOutlet weak var hourlyCollection: UICollectionView!
-    
+    //WeatherViewController background image
     @IBOutlet weak var backgroundImage: UIImageView!
+    //Daily table view
+    @IBOutlet weak var dailyView: UITableView!
+    //Search weathe textField
+    @IBOutlet weak var searchWeather: UITextField!
     
-    @IBOutlet weak var tableView: UITableView!
+    //Recieved weather data
+    var recievedWeatherData: WeatherNameData? = nil
     
-    @IBOutlet weak var searchBar: UITextField!
-    
-    @IBAction func currentLocation(_ sender: UIButton) {
-    }
-    
+    //Remembering the user's location
     var myLonLocation: CLLocationDegrees = 0.0
     var myLatLocation: CLLocationDegrees = 0.0
     
@@ -38,28 +40,37 @@ class WeatherViewController: UIViewController {
 
         //randomBackgroundImage()
 
-        hourlyCollection.register(HourlyCollectionViewCell.nib(), forCellWithReuseIdentifier: "HourlyCollectionViewCell")
-        
+        //Collection settings
+        hourlyCollection.register(
+            HourlyCollectionViewCell.nib(),
+            forCellWithReuseIdentifier: "HourlyCollectionViewCell")
         hourlyCollection.delegate = self
         hourlyCollection.dataSource = self
-        
         hourlyView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
         
-        tableView.register(DailyTableViewCell.nib(), forCellReuseIdentifier: "DailyTableViewCell")
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+        //Table view settings
+        dailyView.register(
+            DailyTableViewCell.nib(),
+            forCellReuseIdentifier: "DailyTableViewCell")
+        dailyView.delegate = self
+        dailyView.dataSource = self
+        dailyView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
 
+        //Weather manager delegate
         weatherManager.delegate = self
         
-        searchBar.delegate = self
-        searchBar.backgroundColor = UIColor.white.withAlphaComponent(0.3)
-        searchBar.layer.cornerRadius = 12.0
-        searchBar.clipsToBounds = true
+        //Text field settings
+        searchWeather.delegate = self
+        searchWeather.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+        searchWeather.layer.cornerRadius = 12.0
+        searchWeather.clipsToBounds = true
         
-        backgroundImage.image = UIImage(named: Constants.BackgroundImage.greenLeaves)
+        //View controller background image settings
+        backgroundImage.image = UIImage(
+            named: Constants.BackgroundImage.greenLeaves)
         backgroundImage.alpha = 0.7
         
+        //Request user location
         getCurrentLocation()
     }
     
@@ -73,14 +84,19 @@ class WeatherViewController: UIViewController {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.startUpdatingLocation()
+//            let lat = locationManager.location?.coordinate.latitude
+//            let lon = locationManager.location?.coordinate.longitude
+//            weatherManager.fetchWeather(latitude: lat!, longitude: lon!)
         }
-    }
-
     
+    }
+    
+    //Search weather data for your location
     @IBAction func weatherByCurrentLocation(_ sender: UIButton) {
-        weatherManager.fetchWeather(latitude: myLonLocation, longitude: myLatLocation)
+        weatherManager.fetchWeather(latitude: myLatLocation, longitude: myLonLocation)
     }
     
+    //Set view background color by weather id
     func randomBackgroundImage() {
         let randomNumber = Int.random(in: 0..<6)
         
@@ -106,6 +122,7 @@ class WeatherViewController: UIViewController {
 }
 
 
+//MARK: UICollectionViewDelegate
 
 extension WeatherViewController: UICollectionViewDelegate {
     
@@ -115,48 +132,89 @@ extension WeatherViewController: UICollectionViewDelegate {
     
 }
 
+
+//MARK: UICollectionViewDataSource
+
 extension WeatherViewController: UICollectionViewDataSource {
+    
+    //Amount of cells
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 24
+        return recievedWeatherData?.hourly.count ?? 0
     }
     
+    //Create collectionView reusable cell
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HourlyCollectionViewCell", for: indexPath) as! HourlyCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "HourlyCollectionViewCell",
+            for: indexPath) as! HourlyCollectionViewCell
         
-        cell.configure(with: UIImage(named: "facebookLogo-40")!)
-        
+//        let date = NSDate(timeIntervalSince1970: TimeInterval((recievedWeatherData?.hourly[0].dt) ?? 0))
+//        print("tableview2")
+//
+//        print(date)
+//
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "HH:mm"
+//        let currentTime = formatter.string(from: date as Date)
+//        print(currentTime)
+//        let temp = String(format: "%.1f", recievedWeatherData?.hourly[0].temp ?? 0)
+//        print(temp)
+//        let celsiusTemp = "\(temp)\(Constants.degreeCelsius)"
+//
+//        cell.configure(image: UIImage(named: "facebookLogo-40")!,
+//                       time: currentTime,
+//                       temperature: celsiusTemp)
+
         return cell
     }
      
-    
-    
 }
 
-
+//MARK: UITableViewDelegate
 
 extension WeatherViewController: UITableViewDelegate {
+    
+    //Method to operate with cell action
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped cell number \(indexPath.row).")
     }
 }
 
+
+//MARK: UITableViewDataSource
+
 extension WeatherViewController: UITableViewDataSource {
+    
+    //Amount of cells
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return recievedWeatherData?.daily.count ?? 0
     }
     
+    //Create tableView reusable cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "DailyTableViewCell") as! DailyTableViewCell
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "DailyTableViewCell", for: indexPath) as! DailyTableViewCell
             
-            cell.configure(with: UIImage(named: "googleLogo-40")!)
-            cell.layer.backgroundColor = UIColor.clear.cgColor
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "HH:mm"
+//        let currentTime = formatter.string(from: date as Date)
+//        print(currentTime)
+//        let min = String(format: "%.1f", recievedWeatherData?.daily[0].temp.min ?? 0)
+//        let max = String(format: "%.1f", recievedWeatherData?.daily[0].temp.max ?? 0)
+//
+//        let maxTemp = "Max: \(max)"
+//        let minTemp = "Min: \(min)"
+//
+//        let date = NSDate(timeIntervalSinceReferenceDate: (recievedWeatherData?.daily[0].dt ?? 0))
+//        let weatherDay = DateFormatter().string(from: date as Date)
+//
+//        cell.configure(image: UIImage(named: "googleLogo-40")!, day: "Tue", max: maxTemp, min: minTemp)
         
-            return cell
-        }
+        cell.layer.backgroundColor = UIColor.clear.cgColor
+        
+        return cell
+    }
 }
-
-
-
 
 
 //MARK: - UITextFieldDelegate
@@ -164,7 +222,7 @@ extension WeatherViewController: UITableViewDataSource {
 extension WeatherViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        searchBar.endEditing(true)
+        searchWeather.endEditing(true)
         return true
     }
     
@@ -178,22 +236,31 @@ extension WeatherViewController: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
-        if let city = searchBar.text {
+        if let city = searchWeather.text {
+            
+            //Find weather by user-entered city name
             weatherManager.fetchWeather(cityName: city)
         }
-        
-        searchBar.text = ""
+        searchWeather.text = ""
     }
 }
 
+
+//MARK: WeatherManagerDelegate
+
 extension WeatherViewController: WeatherManagerDelegate {
     
+    //Protocol method, loaded when we decode the data
     func didUpdateWeather(_ weatherManager: WeatherManager, data: WeatherNameData) {
         DispatchQueue.main.async {
+            self.recievedWeatherData = data
+            
             self.cityLabel.text = data.timezone
             self.temperatureLabel.text = String(format: "%.1f", data.current.temp)
-            //self.conditionImageView.image = UIImage(systemName: setWeather().conditionName(conditionId: data.current.weather[0].id))
+            
+            //Reload data to change view values
+            self.dailyView.reloadData()
+            self.hourlyCollection.reloadData()
         }
     }
     
@@ -202,11 +269,18 @@ extension WeatherViewController: WeatherManagerDelegate {
     }
 }
 
+
+//MARK: CLLocationManagerDelegate
+
 extension WeatherViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-           guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        
+        //Remember locations for further operations on them
         myLatLocation = locValue.latitude
         myLonLocation = locValue.longitude
+
+        //Call fetchWeather method to load weather data
         weatherManager.fetchWeather(latitude: locValue.latitude, longitude: locValue.longitude)
     }
 }

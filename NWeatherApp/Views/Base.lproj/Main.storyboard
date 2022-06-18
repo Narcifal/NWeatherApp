@@ -247,10 +247,10 @@
                     <connections>
                         <outlet property="backgroundImage" destination="TAE-DU-siV" id="vTe-QJ-9eX"/>
                         <outlet property="cityLabel" destination="Hio-J1-1hC" id="mUE-lO-eff"/>
+                        <outlet property="dailyView" destination="Yqd-uu-Daf" id="c01-Mu-dcO"/>
                         <outlet property="hourlyCollection" destination="4Tf-w0-Kmr" id="gV9-YI-9MK"/>
                         <outlet property="hourlyView" destination="5JO-T0-Cmr" id="4eF-wF-Cbh"/>
-                        <outlet property="searchBar" destination="pai-fu-AVh" id="r9U-Ub-rwk"/>
-                        <outlet property="tableView" destination="Yqd-uu-Daf" id="ubS-RO-jh6"/>
+                        <outlet property="searchWeather" destination="pai-fu-AVh" id="wCC-c9-tBS"/>
                         <outlet property="temperatureLabel" destination="r3m-tg-GmR" id="x2l-pf-JBx"/>
                     </connections>
                 </viewController>
@@ -268,51 +268,47 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tns-mS-eoR" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GoogleMapMarker" translatesAutoresizingMaskIntoConstraints="NO" id="TcS-TP-isF">
-                                        <rect key="frame" x="174.5" y="354.5" width="65" height="65"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="65" id="awI-RF-Mhh"/>
-                                            <constraint firstAttribute="width" constant="65" id="ec6-2r-rbN"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XMQ-09-NKA">
-                                        <rect key="frame" x="46" y="695" width="323" height="51"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemGrayColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <integer key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </label>
-                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="TcS-TP-isF" firstAttribute="centerX" secondItem="Tns-mS-eoR" secondAttribute="centerX" id="m0w-J0-JRW"/>
-                                    <constraint firstItem="TcS-TP-isF" firstAttribute="centerY" secondItem="Tns-mS-eoR" secondAttribute="centerY" id="m7v-90-RV1"/>
-                                </constraints>
                             </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GoogleMapMarker" translatesAutoresizingMaskIntoConstraints="NO" id="TcS-TP-isF">
+                                <rect key="frame" x="174.5" y="415.5" width="65" height="65"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="awI-RF-Mhh"/>
+                                    <constraint firstAttribute="width" constant="65" id="ec6-2r-rbN"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQ4-Hr-7uB">
+                                <rect key="frame" x="0.0" y="819" width="414" height="43"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qsh-qI-ZsE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Tns-mS-eoR" firstAttribute="leading" secondItem="qsh-qI-ZsE" secondAttribute="leading" id="6aM-wM-Cvo"/>
                             <constraint firstItem="Tns-mS-eoR" firstAttribute="trailing" secondItem="qsh-qI-ZsE" secondAttribute="trailing" id="7lI-rJ-tci"/>
+                            <constraint firstItem="TcS-TP-isF" firstAttribute="centerY" secondItem="5sR-rC-UJq" secondAttribute="centerY" id="CsL-BW-qcZ"/>
+                            <constraint firstItem="tQ4-Hr-7uB" firstAttribute="trailing" secondItem="qsh-qI-ZsE" secondAttribute="trailing" id="FmO-Mq-6ch"/>
+                            <constraint firstItem="tQ4-Hr-7uB" firstAttribute="leading" secondItem="qsh-qI-ZsE" secondAttribute="leading" id="IXf-6F-ggz"/>
+                            <constraint firstItem="TcS-TP-isF" firstAttribute="centerX" secondItem="5sR-rC-UJq" secondAttribute="centerX" id="KoE-ug-qqd"/>
                             <constraint firstItem="Tns-mS-eoR" firstAttribute="top" secondItem="qsh-qI-ZsE" secondAttribute="top" id="Vu3-Uh-KVH"/>
+                            <constraint firstItem="qsh-qI-ZsE" firstAttribute="bottom" secondItem="tQ4-Hr-7uB" secondAttribute="bottom" id="alA-4y-VRa"/>
                             <constraint firstItem="Tns-mS-eoR" firstAttribute="bottom" secondItem="qsh-qI-ZsE" secondAttribute="bottom" id="mZZ-dt-zd1"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="GoogleMaps" id="Mjy-Ah-5Qc">
                         <barButtonItem key="backBarButtonItem" title="Back" id="yDv-fd-zgu"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="HJp-6v-Nk6">
+                            <connections>
+                                <action selector="getWeatherButton:" destination="qVC-Jd-a1q" id="4Dy-Q1-jY0"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addressLabel" destination="XMQ-09-NKA" id="3hW-fz-jm8"/>
-                        <outlet property="mapCenterPinImage" destination="TcS-TP-isF" id="jHx-5E-t1M"/>
-                        <outlet property="mapView" destination="Tns-mS-eoR" id="W47-Zj-vfP"/>
+                        <outlet property="addressLabel" destination="tQ4-Hr-7uB" id="DXu-nT-61z"/>
+                        <outlet property="mapView" destination="Tns-mS-eoR" id="yQI-tN-uiA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3uf-4S-S6W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -349,16 +345,13 @@
         <image name="globe.asia.australia" catalog="system" width="128" height="121"/>
         <image name="googleLogo-29" width="29" height="29"/>
         <image name="greenLeavesBackground" width="2736" height="5927"/>
-        <image name="paperplane.fill" catalog="system" width="32" height="32"/>
+        <image name="paperplane.fill" catalog="system" width="128" height="118"/>
         <image name="riverMountainBackground" width="4368" height="6639"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
