@@ -41,7 +41,7 @@ class WelcomeViewController: UIViewController {
             GIDSignIn.sharedInstance().signOut()
             
             //Display popup
-            successfullySignedInPopUp(with: "Google", didLogged: "Out")
+            successfullySignedOutPopUp(with: "Google", didLogged: "Out")
         }
         else
         {
@@ -67,7 +67,7 @@ class WelcomeViewController: UIViewController {
             LoginManager().logOut()
             
             //Display popup
-            successfullySignedInPopUp(with: "Facebook", didLogged: "Out")
+            successfullySignedOutPopUp(with: "Facebook", didLogged: "Out")
         } else {
             //LogIn Facebook manager
             LoginManager().logIn()
@@ -88,7 +88,7 @@ class WelcomeViewController: UIViewController {
     
     //MARK: Popup to display if user logged in or logged out
     
-    func successfullySignedInPopUp(with app: String, didLogged: String) {
+    func successfullySignedOutPopUp(with app: String, didLogged: String) {
         let alertController = UIAlertController(title: "You have successfully Logged \(didLogged) to your \(app) account!", message: "", preferredStyle: .alert)
         let continueAction = UIAlertAction(title: "Continue", style: .default, handler: nil)
 

@@ -25,21 +25,18 @@ class WeatherViewController: UIViewController {
     //Search weathe textField
     @IBOutlet weak var searchWeather: UITextField!
     
+    var userCoordLatitude: CLLocationDegrees = 0.0
+    var userCoordLongitude: CLLocationDegrees = 0.0
+    
     //Recieved weather data
     var recievedWeatherData: WeatherNameData? = nil
-    
-    //Remembering the user's location
-    var myLonLocation: CLLocationDegrees = 0.0
-    var myLatLocation: CLLocationDegrees = 0.0
     
     var weatherManager = WeatherManager()
     var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //randomBackgroundImage()
-
+        
         //Collection settings
         hourlyCollection.register(
             HourlyCollectionViewCell.nib(),
@@ -72,8 +69,12 @@ class WeatherViewController: UIViewController {
         
         //Request user location
         getCurrentLocation()
+        
+        //randomBackgroundImage()
+
     }
     
+    //Method to get user location
     func getCurrentLocation() {
         // Ask for Authorisation from the User.
         self.locationManager.requestAlwaysAuthorization()
@@ -84,16 +85,29 @@ class WeatherViewController: UIViewController {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.startUpdatingLocation()
-//            let lat = locationManager.location?.coordinate.latitude
-//            let lon = locationManager.location?.coordinate.longitude
-//            weatherManager.fetchWeather(latitude: lat!, longitude: lon!)
         }
     
     }
     
     //Search weather data for your location
     @IBAction func weatherByCurrentLocation(_ sender: UIButton) {
-        weatherManager.fetchWeather(latitude: myLatLocation, longitude: myLonLocation)
+        if  userCoordLongitude != 0.0,  userCoordLatitude != 0.0 {
+            weatherManager.fetchWeather(latitude: userCoordLatitude,
+                                        longitude: userCoordLongitude)
+        } else {
+            let alertController = UIAlertController(
+                                                    title:
+                                                        "You have banned the use of your location.",
+                                                    message: "",
+                                                    preferredStyle: .alert)
+            let continueAction = UIAlertAction(title: "Continue",
+                                               style: .default,
+                                               handler: nil)
+            alertController.addAction(continueAction)
+
+            present(alertController, animated: true, completion: nil)
+            //getCurrentLocation()
+        }
     }
     
     //Set view background color by weather id
@@ -275,11 +289,9 @@ extension WeatherViewController: WeatherManagerDelegate {
 extension WeatherViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        
-        //Remember locations for further operations on them
-        myLatLocation = locValue.latitude
-        myLonLocation = locValue.longitude
 
+        userCoordLongitude = locValue.longitude
+        userCoordLatitude = locValue.latitude
         //Call fetchWeather method to load weather data
         weatherManager.fetchWeather(latitude: locValue.latitude, longitude: locValue.longitude)
     }
