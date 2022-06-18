@@ -241,7 +241,7 @@
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="googleMapsButton:" destination="kGJ-AN-eVN" id="XXg-ac-Xc5"/>
-                                <segue destination="qVC-Jd-a1q" kind="push" identifier="goToGoogleMaps" id="Y5y-ie-j8x"/>
+                                <segue destination="qVC-Jd-a1q" kind="push" identifier="goToGoogleMaps" id="zWB-lm-Esa"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
