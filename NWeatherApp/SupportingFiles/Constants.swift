@@ -9,13 +9,12 @@ import Foundation
 
 struct Constants {
     
-    static let degreeCelsius = "°C"
-    
     struct Segues {
         static let goToWeather = "goToWeather"
+        static let goToGoogleMaps = "goToGoogleMaps"
     }
     
-    struct BackgroundImage {
+    struct BackgroundImages {
         static let twilightMoon = "twilightMoonBackround"
         static let sunsetField = "sunsetFieldBackround"
         static let riverMountain = "riverMountainBackground"
@@ -24,8 +23,17 @@ struct Constants {
         static let deepNight = "deepNightBackground"
     }
     
-    struct API {
+    struct APIKeys {
         static let googleMapsApi = "AIzaSyAGDORMYoad9KIzrDiA-DZ5Ffc-uVo11xg"
         static let googleSignInClientID = "661995097316-078fdgscnh5qhp0tlsn5slftqpv161v5.apps.googleusercontent.com"
+    }
+    
+    struct Cells {
+        static let hourly = "HourlyCollectionViewCell"
+        static let daily = "DailyTableViewCell"
+    }
+    
+    struct Temperature {
+        static let degreeCelsius = "°C"
     }
 }

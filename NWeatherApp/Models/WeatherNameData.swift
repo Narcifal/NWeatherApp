@@ -9,7 +9,7 @@ struct WeatherNameData: Codable {
 
 struct Hourly: Codable {
     let temp: Double
-    let dt: Int
+    let dt: TimeInterval
     let weather: [Weather]
 }
 

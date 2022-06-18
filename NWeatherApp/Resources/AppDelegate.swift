@@ -17,11 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         //GoogleMaps settings
-        GMSServices.provideAPIKey(Constants.API.googleMapsApi)
+        GMSServices.provideAPIKey(Constants.APIKeys.googleMapsApi)
         
         //GoogleSignIn/Firebase settings
         FirebaseApp.configure()
-        GIDSignIn.sharedInstance()?.clientID = Constants.API.googleSignInClientID
+        GIDSignIn.sharedInstance()?.clientID = Constants.APIKeys.googleSignInClientID
         
         //Facebook settings
         ApplicationDelegate.shared.application(

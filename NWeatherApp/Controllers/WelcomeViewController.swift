@@ -12,10 +12,11 @@ import GoogleSignIn
 
 class WelcomeViewController: UIViewController {
 
-    @IBOutlet var backgroundImage: UIImageView!
+    @IBOutlet private var backgroundImage: UIImageView!
 
-    @IBOutlet weak var googleButton: UIButton!
-    @IBOutlet weak var facebookLoginButton: UIButton!
+    @IBOutlet private weak var googleButton: UIButton!
+    @IBOutlet private weak var facebookLoginButton: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +29,12 @@ class WelcomeViewController: UIViewController {
         
         //LogOut from Google on load
         GIDSignIn.sharedInstance().signOut()
+        
         GIDSignIn.sharedInstance()?.presentingViewController = self
     }
 
     
-    //MARK: SignIn with Google
+    //SignIn with Google
     
     @IBAction func googleSignIn(_ sender: UIButton) {
         if(GIDSignIn.sharedInstance()?.currentUser != nil)
@@ -49,17 +51,19 @@ class WelcomeViewController: UIViewController {
             GIDSignIn.sharedInstance().signIn()
         }
     }
-
     
     
-    //MARK: SignIn with Facebook
+    //SignIn with Facebook
     
     @IBAction func facebookSignIn(_ sender: UIButton) {
         facebookLogInOut()
     }
     
+    
+    //Facebook user auth check
+    
     func facebookLogInOut() {
-        //Method to check if user logged in
+        //Check if user logged in
         if let token = AccessToken.current, !token.isExpired {
             facebookLoginResult()
             
@@ -74,50 +78,39 @@ class WelcomeViewController: UIViewController {
         }
     }
     
+    
+    //Get Facebook result data
+    
     func facebookLoginResult() {
         let token = AccessToken.current?.tokenString
         let request = FBSDKLoginKit.GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], tokenString: token, version: nil, httpMethod: .get)
 
         request.start { connection, result, error in
             print(result as Any)
-            //print(token as Any)
-            //print(AccessToken.current as Any)
         }
     }
-    
-    
-    //MARK: Popup to display if user logged in or logged out
-    
-    func successfullySignedOutPopUp(with app: String, didLogged: String) {
-        let alertController = UIAlertController(title: "You have successfully Logged \(didLogged) to your \(app) account!", message: "", preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Continue", style: .default, handler: nil)
 
-        alertController.addAction(continueAction)
-
-        present(alertController, animated: true, completion: nil)
-    }
     
-    
-    //MARK: Change background image to random
+    //Change background image to random
     
     func randomBackgroundImage() {
         let randomNumber = Int.random(in: 0..<6)
         
         switch(randomNumber) {
         case 0:
-            backgroundImage.image = UIImage(named: Constants.BackgroundImage.deepNight)
+            backgroundImage.image = UIImage(named: Constants.BackgroundImages.deepNight)
         case 1:
-            backgroundImage.image = UIImage(named: Constants.BackgroundImage.fallingStar)
+            backgroundImage.image = UIImage(named: Constants.BackgroundImages.fallingStar)
         case 2:
-            backgroundImage.image = UIImage(named: Constants.BackgroundImage.greenLeaves)
+            backgroundImage.image = UIImage(named: Constants.BackgroundImages.greenLeaves)
         case 3:
-            backgroundImage.image = UIImage(named: Constants.BackgroundImage.riverMountain)
+            backgroundImage.image = UIImage(named: Constants.BackgroundImages.riverMountain)
         case 4:
-            backgroundImage.image = UIImage(named: Constants.BackgroundImage.sunsetField)
+            backgroundImage.image = UIImage(named: Constants.BackgroundImages.sunsetField)
         case 5:
-            backgroundImage.image = UIImage(named: Constants.BackgroundImage.twilightMoon)
+            backgroundImage.image = UIImage(named: Constants.BackgroundImages.twilightMoon)
         default:
-            backgroundImage.image = UIImage(named: Constants.BackgroundImage.greenLeaves)
+            backgroundImage.image = UIImage(named: Constants.BackgroundImages.greenLeaves)
         }
         
         backgroundImage.alpha = 0.5

@@ -17,26 +17,37 @@ class MapViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        //navigationController!.navigationBar.tintColor = .link
-        
+
+        //Google map view settings
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
-        mapView.settings.compassButton = true
+        //mapView.delegate = self
+        
+        //Address label background alpha
         addressLabel.backgroundColor = .lightGray.withAlphaComponent(0.8)
         
-        mapView.delegate = self
+        //WeatherManager delegate
         weatherManager.delegate = self
     }
     
+    
+    //Search button clicked
+    
     @IBAction func getWeatherButton(_ sender: Any) {
         if latitude != 0.0, longitude != 0.0 {
+            
+            //Load data by latitude and longitude of user marker
             weatherManager.fetchWeather(latitude: latitude, longitude: longitude)
+            
+            //Load WeatherViewController
             navigationController?.popViewController(animated: true)
         } else {
-            print("")
+            print("Error")
         }
     }
+    
+    
+    //Get coordinates
     
     private func reverseGeocodeCoordinate(_ coordinate: CLLocationCoordinate2D) {
         let geocoder = GMSGeocoder()
@@ -65,22 +76,7 @@ extension MapViewController: GMSMapViewDelegate {
 }
 
 
-// MARK: - CLLocationManagerDelegate
-
-//extension MapViewController: CLLocationManagerDelegate {
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//
-//        guard let location = locations.first else {
-//            return
-//        }
-//
-//        mapView.camera = GMSCameraPosition(
-//            target: location.coordinate,
-//            zoom: 18,
-//            bearing: 0,
-//            viewingAngle: 0)
-//    }
-//}
+//MARK: - WeatherManagerDelegate
 
 extension MapViewController: WeatherManagerDelegate {
     
@@ -94,5 +90,23 @@ extension MapViewController: WeatherManagerDelegate {
     
     func didFailWithError(error: Error) {
         print(error)
+    }
+}
+
+
+// MARK: - CLLocationManagerDelegate
+
+extension MapViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
+        guard let location = locations.first else {
+            return
+        }
+
+        mapView.camera = GMSCameraPosition(
+            target: location.coordinate,
+            zoom: 18,
+            bearing: 0,
+            viewingAngle: 0)
     }
 }

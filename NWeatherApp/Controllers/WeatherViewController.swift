@@ -31,13 +31,14 @@ final class WeatherViewController: UIViewController {
     private var weatherManager = WeatherManager()
     private var locationManager = CLLocationManager()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Collection settings
         hourlyCollection.register(
             HourlyCollectionViewCell.nib(),
-            forCellWithReuseIdentifier: "HourlyCollectionViewCell")
+            forCellWithReuseIdentifier: Constants.Cells.hourly)
         hourlyCollection.delegate = self
         hourlyCollection.dataSource = self
         hourlyView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
@@ -45,7 +46,7 @@ final class WeatherViewController: UIViewController {
         //Table view settings
         dailyView.register(
             DailyTableViewCell.nib(),
-            forCellReuseIdentifier: "DailyTableViewCell")
+            forCellReuseIdentifier: Constants.Cells.daily)
         dailyView.delegate = self
         dailyView.dataSource = self
         dailyView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
@@ -61,7 +62,7 @@ final class WeatherViewController: UIViewController {
         
         //View controller background image settings
         backgroundImage.image = UIImage(
-            named: Constants.BackgroundImage.greenLeaves)
+            named: Constants.BackgroundImages.greenLeaves)
         backgroundImage.alpha = 0.7
         
         //Request user location
@@ -69,6 +70,7 @@ final class WeatherViewController: UIViewController {
         
         //randomBackgroundImage()
     }
+    
     
     //Method to get user location
     func getCurrentLocation() {
@@ -90,24 +92,19 @@ final class WeatherViewController: UIViewController {
         }
     }
     
+    
     //Search weather data for your location
     @IBAction func weatherByCurrentLocation(_ sender: UIButton) {
+        //User location coordinates
         let latitude = locationManager.location?.coordinate.latitude
         let longitude = locationManager.location?.coordinate.longitude
         
+        //Check if coordinates is not empty
         if  latitude != 0.0,  longitude != 0.0 {
             weatherManager.fetchWeather(latitude: latitude ?? 0.0,
                                         longitude: longitude ?? 0.0)
         } else {
-            let alertController = UIAlertController(
-                                                    title: "You have banned the use of your location.",
-                                                    message: "",
-                                                    preferredStyle: .alert)
-            let continueAction = UIAlertAction(title: "Continue",
-                                               style: .default,
-                                               handler: nil)
-            alertController.addAction(continueAction)
-
+            let alertController: UIAlertController = Popup().weatherByCurrentLocationWasBlocked()
             present(alertController, animated: true, completion: nil)
         }
     }
@@ -125,9 +122,10 @@ final class WeatherViewController: UIViewController {
         self.hourlyCollection.reloadData()
     }
     
+    
     //Prepare for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "goToGoogleMaps") {
+        if (segue.identifier == Constants.Segues.goToGoogleMaps) {
             let mapViewController = segue.destination as? MapViewController
             
             //Call a configure method ....
@@ -140,7 +138,7 @@ final class WeatherViewController: UIViewController {
 }
 
 
-//MARK: UICollectionViewDelegate
+//MARK: - UICollectionViewDelegate
 
 extension WeatherViewController: UICollectionViewDelegate {
     
@@ -151,47 +149,49 @@ extension WeatherViewController: UICollectionViewDelegate {
 }
 
 
-//MARK: UICollectionViewDataSource
+//MARK: - UICollectionViewDataSource
 
 extension WeatherViewController: UICollectionViewDataSource {
     
     //Amount of cells
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return ((recievedWeatherData?.hourly.count ?? 0)/2)
+        return (recievedWeatherData?.hourly.count ?? 0)/2
     }
     
     //Create collectionView reusable cell
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        //Create a dequeue reusable cell
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "HourlyCollectionViewCell",
+            withReuseIdentifier: Constants.Cells.hourly,
             for: indexPath) as! HourlyCollectionViewCell
         
-        let date = NSDate(timeIntervalSince1970: TimeInterval((recievedWeatherData?.hourly[indexPath.item].dt) ?? 0))
-        print(date)
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        var currentTime: String = ""
-        
-        if indexPath.item != 0 {
-            currentTime = formatter.string(from: date as Date)
-        } else {
-            currentTime = "Current"
+        //Hourly path
+        let hourly = recievedWeatherData?.hourly[indexPath.item]
+
+        //String with formatted date (hours)
+        var hourlyTime = hourly?.dt.toString() ?? ""
+
+        //Check if current cell is the first element
+        if indexPath.item == 0 {
+            hourlyTime = "Current"
         }
         
-        let temp = String(format: "%.1f", recievedWeatherData?.hourly[indexPath.item].temp ?? 0)
-        let celsiusTemp = "\(temp)\(Constants.degreeCelsius)"
-        print(currentTime)
-        cell.configure(image: UIImage(named: "facebookLogo-40")!,
-                       time: currentTime,
-                       temperature: celsiusTemp)
-
+        //Double formatted to String
+        let hourlyTemp = (hourly?.temp.doubleToFormattedString() ?? "")
+        + Constants.Temperature.degreeCelsius
         
+        //Cell settings
+        cell.configure(image: UIImage(named: "facebookLogo-40")!,
+                       time: hourlyTime,
+                       temperature: hourlyTemp)
+
         return cell
     }
      
 }
 
-//MARK: UITableViewDelegate
+//MARK: - UITableViewDelegate
 
 extension WeatherViewController: UITableViewDelegate {
     
@@ -202,7 +202,7 @@ extension WeatherViewController: UITableViewDelegate {
 }
 
 
-//MARK: UITableViewDataSource
+//MARK: - UITableViewDataSource
 
 extension WeatherViewController: UITableViewDataSource {
     
@@ -213,26 +213,29 @@ extension WeatherViewController: UITableViewDataSource {
     
     //Create tableView reusable cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //Create a dequeue reusable cell
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: "DailyTableViewCell", for: indexPath) as! DailyTableViewCell
+            withIdentifier: Constants.Cells.daily, for: indexPath) as! DailyTableViewCell
 
-        let str = recievedWeatherData?.daily[indexPath.row].dt.toString(dateFormatter: "EE")
+        //Daily path
+        let daily = recievedWeatherData?.daily[indexPath.row]
         
-        let minTemp = "Min: \(String(format: "%.1f", recievedWeatherData?.daily[indexPath.row].temp.min ?? 0))"
-        let maxTemp = "Max: " + String(format: "%.1f", recievedWeatherData?.daily[indexPath.row].temp.max ?? 0)
+        //String with formatted date (Day)
+        var weatherDay = daily?.dt.toString(dateFormatter: "EE") ?? ""
+        
+        //Doubles formatted to String
+        let minTemp = daily?.temp.min.doubleToFormattedString() ?? ""
+        let maxTemp = daily?.temp.max.doubleToFormattedString() ?? ""
 
-        
-        
-        var weatherDay: String = ""
-        
-        if indexPath.row != 0 {
-            weatherDay = str ?? ""
-        } else {
+        //Check if current cell is the first element
+        if indexPath.row == 0 {
             weatherDay = "Current"
         }
-
+        
+        //Cell settings
         cell.configure(image: UIImage(named: "googleLogo-40")!, day: weatherDay, max: maxTemp, min: minTemp)
         
+        //Cell transparent background color
         cell.layer.backgroundColor = UIColor.clear.cgColor
         
         return cell
@@ -269,13 +272,14 @@ extension WeatherViewController: UITextFieldDelegate {
 }
 
 
-//MARK: WeatherManagerDelegate
+//MARK: - WeatherManagerDelegate
 
 extension WeatherViewController: WeatherManagerDelegate {
     
     //Protocol method, loaded when we decode the data
     func didUpdateWeather(_ weatherManager: WeatherManager, data: WeatherNameData) {
         DispatchQueue.main.async {
+            //....
             self.configure(with: data)
         }
     }
@@ -287,7 +291,7 @@ extension WeatherViewController: WeatherManagerDelegate {
 }
 
 
-//MARK: CLLocationManagerDelegate
+//MARK: - CLLocationManagerDelegate
 
 extension WeatherViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

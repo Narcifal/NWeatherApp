@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A015F47285E898800889E99 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A015F46285E898800889E99 /* DoubleExtension.swift */; };
+		9A015F49285E952E00889E99 /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A015F48285E952E00889E99 /* Popup.swift */; };
 		9A1D73D6285D08EC004B27F7 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D73D5285D08EC004B27F7 /* MapViewController.swift */; };
 		9A2FBE9A285E742400B9F56F /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2FBE99285E742400B9F56F /* TimeIntervalExtension.swift */; };
 		9A5D7801285CD87B006CF176 /* DailyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5D77FF285CD87B006CF176 /* DailyTableViewCell.swift */; };
@@ -29,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A015F46285E898800889E99 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
+		9A015F48285E952E00889E99 /* Popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
 		9A1D73D5285D08EC004B27F7 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		9A2FBE99285E742400B9F56F /* TimeIntervalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtension.swift; sourceTree = "<group>"; };
 		9A5D77FF285CD87B006CF176 /* DailyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableViewCell.swift; sourceTree = "<group>"; };
@@ -87,6 +91,8 @@
 			isa = PBXGroup;
 			children = (
 				9A2FBE99285E742400B9F56F /* TimeIntervalExtension.swift */,
+				9A015F46285E898800889E99 /* DoubleExtension.swift */,
+				9A015F48285E952E00889E99 /* Popup.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -311,6 +317,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A015F49285E952E00889E99 /* Popup.swift in Sources */,
+				9A015F47285E898800889E99 /* DoubleExtension.swift in Sources */,
 				9A89CD4E285CCD38000239A4 /* HourlyCollectionViewCell.swift in Sources */,
 				9A92A3E02859107A004FCF87 /* Constants.swift in Sources */,
 				9AEF79EB28590CF6002DC18F /* WeatherViewController.swift in Sources */,
