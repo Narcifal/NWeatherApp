@@ -90,7 +90,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="kGJ-AN-eVN" kind="push" identifier="goToWeather" id="e9T-RC-N4v"/>
+                                    <segue destination="kGJ-AN-eVN" kind="show" identifier="goToWeather" id="e9T-RC-N4v"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -137,16 +137,37 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25°C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3m-tg-GmR">
-                                <rect key="frame" x="0.0" y="220" width="414" height="65"/>
+                                <rect key="frame" x="0.0" y="219.5" width="414" height="65"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="50"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pve-VR-Tpy">
-                                <rect key="frame" x="0.0" y="344" width="414" height="552"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hio-J1-1hC">
+                                <rect key="frame" x="0.0" y="152" width="414" height="45.5"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="35"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="clh-Fp-I0I">
+                                <rect key="frame" x="183.5" y="104" width="47" height="31"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="paperplane.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="weatherByCurrentLocation:" destination="kGJ-AN-eVN" eventType="touchUpInside" id="dyz-qG-UuG"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clear sky" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdI-Xg-c9c">
+                                <rect key="frame" x="0.0" y="292.5" width="414" height="39"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="igb-cF-bjt">
+                                <rect key="frame" x="20" y="364" width="374" height="498"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5JO-T0-Cmr">
-                                        <rect key="frame" x="20" y="20" width="374" height="164"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="164"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4Tf-w0-Kmr">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="152"/>
@@ -164,7 +185,6 @@
                                         <color key="backgroundColor" systemColor="linkColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="164" id="Gm0-mK-1LW"/>
-                                            <constraint firstAttribute="width" constant="374" id="JXh-ec-auZ"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -173,11 +193,8 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Yqd-uu-Daf">
-                                        <rect key="frame" x="20" y="192" width="374" height="326"/>
+                                        <rect key="frame" x="0.0" y="172" width="374" height="326"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="326" id="Fju-o8-Kqg"/>
-                                        </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <integer key="value" value="25"/>
@@ -185,60 +202,28 @@
                                         </userDefinedRuntimeAttributes>
                                     </tableView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="5JO-T0-Cmr" secondAttribute="bottom" constant="354" id="4Fn-OD-FcJ"/>
-                                    <constraint firstItem="5JO-T0-Cmr" firstAttribute="trailing" secondItem="Yqd-uu-Daf" secondAttribute="trailing" id="eLn-Rr-JN3"/>
-                                    <constraint firstItem="5JO-T0-Cmr" firstAttribute="centerX" secondItem="pve-VR-Tpy" secondAttribute="centerX" id="hUk-5B-Vlm"/>
-                                    <constraint firstItem="Yqd-uu-Daf" firstAttribute="top" secondItem="5JO-T0-Cmr" secondAttribute="bottom" constant="8" id="krz-vB-Kud"/>
-                                    <constraint firstItem="5JO-T0-Cmr" firstAttribute="top" secondItem="rVd-FY-4mx" secondAttribute="top" constant="20" id="mp0-0s-ngx"/>
-                                    <constraint firstAttribute="trailing" secondItem="5JO-T0-Cmr" secondAttribute="trailing" constant="20" id="p4P-Jz-nYC"/>
-                                    <constraint firstItem="5JO-T0-Cmr" firstAttribute="leading" secondItem="Yqd-uu-Daf" secondAttribute="leading" id="svP-Mm-OS3"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="BLv-RW-8tI"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="rVd-FY-4mx"/>
-                            </scrollView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hio-J1-1hC">
-                                <rect key="frame" x="0.0" y="152" width="414" height="46"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="35"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="clh-Fp-I0I">
-                                <rect key="frame" x="183.5" y="104" width="47" height="31"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="paperplane.fill" catalog="system"/>
-                                <connections>
-                                    <action selector="weatherByCurrentLocation:" destination="kGJ-AN-eVN" eventType="touchUpInside" id="dyz-qG-UuG"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clear sky" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdI-Xg-c9c">
-                                <rect key="frame" x="0.0" y="293" width="414" height="39"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="30"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="TdS-oL-7BI"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Hio-J1-1hC" firstAttribute="top" secondItem="clh-Fp-I0I" secondAttribute="bottom" constant="17" id="12z-Ca-AwR"/>
+                            <constraint firstItem="igb-cF-bjt" firstAttribute="top" secondItem="qdI-Xg-c9c" secondAttribute="bottom" constant="32.5" id="1j9-K2-i8w"/>
                             <constraint firstItem="clh-Fp-I0I" firstAttribute="top" secondItem="TdS-oL-7BI" secondAttribute="top" constant="16" id="66M-qG-OfL"/>
-                            <constraint firstItem="pve-VR-Tpy" firstAttribute="trailing" secondItem="TAE-DU-siV" secondAttribute="trailing" id="6gu-xV-Qhn"/>
-                            <constraint firstItem="TAE-DU-siV" firstAttribute="bottom" secondItem="pve-VR-Tpy" secondAttribute="bottom" id="Chl-aH-zSr"/>
+                            <constraint firstItem="TAE-DU-siV" firstAttribute="trailing" secondItem="qdI-Xg-c9c" secondAttribute="trailing" id="72P-2T-Im6"/>
+                            <constraint firstItem="TdS-oL-7BI" firstAttribute="trailing" secondItem="igb-cF-bjt" secondAttribute="trailing" constant="20" id="AkE-cf-bib"/>
                             <constraint firstItem="qdI-Xg-c9c" firstAttribute="leading" secondItem="TdS-oL-7BI" secondAttribute="leading" id="JMO-ia-fAd"/>
-                            <constraint firstItem="pve-VR-Tpy" firstAttribute="trailing" secondItem="TdS-oL-7BI" secondAttribute="trailing" id="Ki3-Ri-fRI"/>
-                            <constraint firstAttribute="bottom" secondItem="pve-VR-Tpy" secondAttribute="bottom" id="LxC-lR-dcz"/>
                             <constraint firstItem="TAE-DU-siV" firstAttribute="top" secondItem="7rc-xQ-zeD" secondAttribute="top" id="NcR-K3-2W3"/>
                             <constraint firstItem="Hio-J1-1hC" firstAttribute="leading" secondItem="TdS-oL-7BI" secondAttribute="leading" id="XRF-4s-Jyu"/>
                             <constraint firstItem="r3m-tg-GmR" firstAttribute="leading" secondItem="TdS-oL-7BI" secondAttribute="leading" id="eCc-lD-zZm"/>
-                            <constraint firstItem="pve-VR-Tpy" firstAttribute="leading" secondItem="TdS-oL-7BI" secondAttribute="leading" id="fwP-CQ-6Zl"/>
                             <constraint firstItem="r3m-tg-GmR" firstAttribute="trailing" secondItem="TdS-oL-7BI" secondAttribute="trailing" id="gUN-DQ-6d9"/>
                             <constraint firstItem="qdI-Xg-c9c" firstAttribute="top" secondItem="r3m-tg-GmR" secondAttribute="bottom" constant="8" symbolic="YES" id="hzv-Pf-ALQ"/>
+                            <constraint firstItem="igb-cF-bjt" firstAttribute="bottom" secondItem="TdS-oL-7BI" secondAttribute="bottom" id="iGC-fw-llU"/>
                             <constraint firstItem="clh-Fp-I0I" firstAttribute="leading" secondItem="TdS-oL-7BI" secondAttribute="leading" constant="183.5" id="mGG-VR-lY4"/>
-                            <constraint firstItem="pve-VR-Tpy" firstAttribute="top" secondItem="qdI-Xg-c9c" secondAttribute="bottom" constant="12" id="tqm-Wg-YIk"/>
+                            <constraint firstAttribute="bottom" secondItem="TAE-DU-siV" secondAttribute="bottom" id="pdR-Pz-dsc"/>
+                            <constraint firstItem="TAE-DU-siV" firstAttribute="leading" secondItem="r3m-tg-GmR" secondAttribute="leading" id="pea-3J-0CI"/>
+                            <constraint firstItem="igb-cF-bjt" firstAttribute="leading" secondItem="TdS-oL-7BI" secondAttribute="leading" constant="20" id="tZP-aj-Px1"/>
                             <constraint firstItem="TdS-oL-7BI" firstAttribute="trailing" secondItem="clh-Fp-I0I" secondAttribute="trailing" constant="183.5" id="uCP-1n-4OQ"/>
-                            <constraint firstItem="pve-VR-Tpy" firstAttribute="leading" secondItem="TAE-DU-siV" secondAttribute="leading" id="xBE-Qg-Ijf"/>
                             <constraint firstItem="Hio-J1-1hC" firstAttribute="trailing" secondItem="TdS-oL-7BI" secondAttribute="trailing" id="yCj-hp-lzo"/>
                             <constraint firstItem="r3m-tg-GmR" firstAttribute="top" secondItem="Hio-J1-1hC" secondAttribute="bottom" constant="22" id="zFa-yC-Vi8"/>
                             <constraint firstItem="qdI-Xg-c9c" firstAttribute="trailing" secondItem="TdS-oL-7BI" secondAttribute="trailing" id="zME-k7-jMF"/>
@@ -264,7 +249,7 @@
                             <color key="tintColor" name="batTintColor"/>
                             <connections>
                                 <action selector="googleMapsButton:" destination="kGJ-AN-eVN" id="XXg-ac-Xc5"/>
-                                <segue destination="qVC-Jd-a1q" kind="push" identifier="goToGoogleMaps" id="zWB-lm-Esa"/>
+                                <segue destination="qVC-Jd-a1q" kind="show" identifier="goToGoogleMaps" id="zWB-lm-Esa"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -281,7 +266,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vub-O0-xKK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1650.7246376811595" y="78.348214285714278"/>
+            <point key="canvasLocation" x="1697" y="78"/>
         </scene>
         <!--GoogleMaps-->
         <scene sceneID="Nvl-QO-Ik2">

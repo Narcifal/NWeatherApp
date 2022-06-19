@@ -245,7 +245,7 @@ extension WeatherViewController: UITableViewDataSource {
         }
 
         //Set condition image
-        let dailyImage = UIImage(named: daily?.weather[0].icon ?? "01d")
+        let dailyImage = UIImage(named: daily?.weather[0].icon ?? "01d")?.resized(to: CGSize(width: 65, height: 65))
         
         //Cell settings
         cell.configure(image: dailyImage,
