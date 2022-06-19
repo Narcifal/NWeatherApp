@@ -184,7 +184,7 @@ extension WeatherViewController: UICollectionViewDataSource {
         + Constants.Temperature.degreeCelsius
         
         //Set condition image
-        let hourlyImage = UIImage(named: hourly?.weather[0].icon ?? "01d")?.resized(to: CGSize(width: 50, height: 50))
+        let hourlyImage = UIImage(named: hourly?.weather[0].icon ?? "01d")?.resized(to: CGSize(width: 75, height: 75))
 
         //Cell settings
         cell.configure(image: hourlyImage,
@@ -195,13 +195,6 @@ extension WeatherViewController: UICollectionViewDataSource {
     }
 }
 
-extension UIImage {
-    func resized(to size: CGSize) -> UIImage {
-        return UIGraphicsImageRenderer(size: size).image { _ in
-            draw(in: CGRect(origin: .zero, size: size))
-        }
-    }
-}
 
 //MARK: - UITableViewDelegate
 
