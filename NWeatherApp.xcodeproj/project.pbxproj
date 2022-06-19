@@ -88,9 +88,9 @@
 			children = (
 				9A2FBE99285E742400B9F56F /* TimeIntervalExtension.swift */,
 				9A015F46285E898800889E99 /* DoubleExtension.swift */,
-				9A015F48285E952E00889E99 /* Popup.swift */,
 				9A52EA0A285F623D00EAB80D /* UIImageExtension.swift */,
 				9A52EA0C285F6D7E00EAB80D /* StringExtension.swift */,
+				9A015F48285E952E00889E99 /* Popup.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";

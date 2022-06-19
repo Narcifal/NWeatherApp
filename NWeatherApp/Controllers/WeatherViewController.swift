@@ -115,7 +115,12 @@ final class WeatherViewController: UIViewController {
     func configure(with data: WeatherNameData) {
         self.recievedWeatherData = data
         
-        self.cityLabel.text = data.timezone
+        if data.timezone != "Etc/GMT"{
+            self.cityLabel.text = data.timezone
+        } else {
+            self.cityLabel.text = "Unknown"
+        }
+        
         self.temperatureLabel.text = String(
             format: "%.1f",
             data.current.temp) + Constants.Temperature.degreeCelsius
