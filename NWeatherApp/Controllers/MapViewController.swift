@@ -47,7 +47,9 @@ class MapViewController: UIViewController{
             //Load WeatherViewController
             navigationController?.popViewController(animated: true)
         } else {
-            let alertController = Popup().googleMapsAddressIsNil()
+            //Display alert controller
+            let alertController =
+                AddingAlertController().googleMapsAddressIsNil()
             present(alertController, animated: true, completion: nil)
         }
     }

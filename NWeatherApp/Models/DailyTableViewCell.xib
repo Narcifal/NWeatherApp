@@ -16,24 +16,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="374" height="83"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgX-wY-Vsg">
-                        <rect key="frame" x="20" y="30" width="63" height="23"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="23" id="Lrj-zH-RGv"/>
-                            <constraint firstAttribute="width" constant="63" id="wVz-Zp-jlT"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Min:  19*C" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="24U-vg-2A9">
                         <rect key="frame" x="201" y="9" width="60" height="65"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="65" id="n9c-Mk-Aic"/>
                             <constraint firstAttribute="width" constant="60" id="vn9-br-aMc"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Max: 28*C" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xjc-6x-IdA">
@@ -42,8 +32,8 @@
                             <constraint firstAttribute="width" constant="60" id="X4l-be-z4R"/>
                             <constraint firstAttribute="height" constant="65" id="aEi-lj-gd0"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CSo-F2-g2h">
@@ -53,16 +43,26 @@
                             <constraint firstAttribute="height" constant="65" id="iv4-OR-ges"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgX-wY-Vsg">
+                        <rect key="frame" x="14" y="30" width="72" height="23"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="23" id="Lrj-zH-RGv"/>
+                            <constraint firstAttribute="width" constant="72" id="wVz-Zp-jlT"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="18"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="CSo-F2-g2h" firstAttribute="leading" secondItem="sgX-wY-Vsg" secondAttribute="trailing" constant="20" id="7EP-PS-rnS"/>
+                    <constraint firstItem="CSo-F2-g2h" firstAttribute="leading" secondItem="sgX-wY-Vsg" secondAttribute="trailing" constant="17" id="7EP-PS-rnS"/>
                     <constraint firstItem="Xjc-6x-IdA" firstAttribute="leading" secondItem="24U-vg-2A9" secondAttribute="trailing" constant="32" id="9ry-zq-FOB"/>
                     <constraint firstItem="Xjc-6x-IdA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="UKx-5Q-CBn"/>
                     <constraint firstAttribute="bottom" secondItem="Xjc-6x-IdA" secondAttribute="bottom" constant="9" id="d6D-tP-wL4"/>
                     <constraint firstItem="sgX-wY-Vsg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="eFJ-5x-YBC"/>
                     <constraint firstAttribute="trailing" secondItem="Xjc-6x-IdA" secondAttribute="trailing" constant="21" id="hKp-HC-Rmg"/>
                     <constraint firstAttribute="bottom" secondItem="sgX-wY-Vsg" secondAttribute="bottom" constant="30" id="iWJ-CG-gvf"/>
-                    <constraint firstItem="sgX-wY-Vsg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="kfZ-4n-I77"/>
+                    <constraint firstItem="sgX-wY-Vsg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="kfZ-4n-I77"/>
                     <constraint firstItem="Xjc-6x-IdA" firstAttribute="centerY" secondItem="sgX-wY-Vsg" secondAttribute="centerY" id="mqJ-dr-b3H"/>
                     <constraint firstItem="24U-vg-2A9" firstAttribute="centerY" secondItem="sgX-wY-Vsg" secondAttribute="centerY" id="o8O-aa-oJ8"/>
                     <constraint firstItem="24U-vg-2A9" firstAttribute="leading" secondItem="CSo-F2-g2h" secondAttribute="trailing" constant="33" id="v8Q-qo-lTk"/>

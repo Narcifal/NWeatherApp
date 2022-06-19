@@ -35,5 +35,6 @@ struct Constants {
     
     struct Temperature {
         static let degreeCelsius = "°C"
+        static let degrees = "°"
     }
 }

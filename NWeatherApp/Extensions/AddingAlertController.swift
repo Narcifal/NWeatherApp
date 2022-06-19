@@ -1,5 +1,5 @@
 //
-//  Popup.swift
+//  AddingAlertController.swift
 //  NWeatherApp
 //
 //  Created by Denys Niestierov on 19.06.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Popup {
+struct AddingAlertController {
     
     func successfullySignedOutPopUp(with app: String) -> UIAlertController {
         let alertController = createAlertController()

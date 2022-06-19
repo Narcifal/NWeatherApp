@@ -44,7 +44,7 @@ final class WeatherViewController: UIViewController {
             forCellWithReuseIdentifier: Constants.Cells.hourly)
         hourlyCollection.delegate = self
         hourlyCollection.dataSource = self
-        hourlyView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+        hourlyView.backgroundColor = UIColor(named: "batTintColor")!.withAlphaComponent(0.7)
         
         //Table view settings
         dailyView.register(
@@ -52,7 +52,7 @@ final class WeatherViewController: UIViewController {
             forCellReuseIdentifier: Constants.Cells.daily)
         dailyView.delegate = self
         dailyView.dataSource = self
-        dailyView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+        dailyView.backgroundColor = UIColor(named: "batTintColor")!.withAlphaComponent(0.7)
 
         //Weather manager delegate
         weatherManager.delegate = self
@@ -105,7 +105,8 @@ final class WeatherViewController: UIViewController {
             weatherManager.fetchWeather(latitude: latitude ?? 0.0,
                                         longitude: longitude ?? 0.0)
         } else {
-            let alertController = Popup().weatherByCurrentLocationWasBlocked()
+            let alertController =
+                AddingAlertController().weatherByCurrentLocationWasBlocked()
             present(alertController, animated: true, completion: nil)
         }
     }
@@ -191,7 +192,7 @@ extension WeatherViewController: UICollectionViewDataSource {
         + Constants.Temperature.degreeCelsius
         
         //Set condition image
-        let hourlyImage = UIImage(named: hourly?.weather[0].icon ?? "01d")?.resized(to: CGSize(width: 65, height: 65))
+        let hourlyImage = UIImage(named: hourly?.weather[0].icon ?? "01d")?.resized(to: CGSize(width: 55, height: 55))
 
         //Cell settings
         cell.configure(image: hourlyImage,
@@ -237,15 +238,19 @@ extension WeatherViewController: UITableViewDataSource {
         
         //Doubles formatted to String
         let minTemp = "Min:\n" + (daily?.temp.min.toFormattedString() ?? "")
-        let maxTemp = "Max:\n" + (daily?.temp.max.toFormattedString() ?? "")
+        + Constants.Temperature.degrees
+        
+        let maxTemp =
+            "Max:\n" + (daily?.temp.max.toFormattedString() ?? "")
+        + Constants.Temperature.degrees
 
         //Check if current cell is the first element
         if indexPath.row == 0 {
-            weatherDay = "Current"
+            weatherDay = "Today"
         }
 
         //Set condition image
-        let dailyImage = UIImage(named: daily?.weather[0].icon ?? "01d")?.resized(to: CGSize(width: 65, height: 65))
+        let dailyImage = UIImage(named: daily?.weather[0].icon ?? "01d")?.resized(to: CGSize(width: 75, height: 75))
         
         //Cell settings
         cell.configure(image: dailyImage,
