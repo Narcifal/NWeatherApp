@@ -1,3 +1,10 @@
+//
+//  MapViewController.swift
+//  NWeatherApp
+//
+//  Created by Denys Niestierov on 15.06.2022.
+//
+
 import UIKit
 import GoogleMaps
 
@@ -18,9 +25,7 @@ class MapViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //Google map view settings
-        mapView.isMyLocationEnabled = true
-        mapView.settings.myLocationButton = true
+        //Google map view delegate
         mapView.delegate = self
         
         //Address label background alpha
@@ -51,15 +56,21 @@ class MapViewController: UIViewController{
     //Get coordinates
     
     private func reverseGeocodeCoordinate(_ coordinate: CLLocationCoordinate2D) {
+        
+        //Create a GMSGeocoder object to turn a latitude and longitude coordinate into a street address.
         let geocoder = GMSGeocoder()
         
+        //Ask to reverse geocode the coordinate passed to the method.
         geocoder.reverseGeocodeCoordinate(coordinate) { response, error in
             guard let address = response?.firstResult(), let lines = address.lines else {
                 self.addressLabel.text = "No address"
                 return
             }
             
+            //Sets the text of the addressLabel to the address returned by the geocoder.
             self.addressLabel.text = lines.joined(separator: "\n")
+            
+            //Remembering longitude and latitude coordinates
             self.longitude = address.coordinate.longitude
             self.latitude = address.coordinate.latitude
         }
@@ -71,6 +82,9 @@ class MapViewController: UIViewController{
 // MARK: - GMSMapViewDelegate
 
 extension MapViewController: GMSMapViewDelegate {
+    
+    //Called each time the map stops moving and settles in a new position.
+    //Make a call to reverse geocode the new position and update the addressLabel‘s text.
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
         reverseGeocodeCoordinate(position.target)
     }
@@ -81,7 +95,7 @@ extension MapViewController: GMSMapViewDelegate {
 
 extension MapViewController: WeatherManagerDelegate {
     
-    //Protocol method, loaded when we decode the data
+    //Protocol method loaded when we decode the data
     func didUpdateWeather(_ weatherManager: WeatherManager, data: WeatherNameData) {
         
         DispatchQueue.main.async {
@@ -91,23 +105,5 @@ extension MapViewController: WeatherManagerDelegate {
     
     func didFailWithError(error: Error) {
         print(error)
-    }
-}
-
-
-// MARK: - CLLocationManagerDelegate
-
-extension MapViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-
-        guard let location = locations.first else {
-            return
-        }
-
-        mapView.camera = GMSCameraPosition(
-            target: location.coordinate,
-            zoom: 18,
-            bearing: 0,
-            viewingAngle: 0)
     }
 }

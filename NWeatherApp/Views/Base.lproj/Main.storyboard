@@ -139,7 +139,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5JO-T0-Cmr">
-                                <rect key="frame" x="20" y="311" width="374" height="152"/>
+                                <rect key="frame" x="20" y="364" width="374" height="164"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4Tf-w0-Kmr">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="152"/>
@@ -165,10 +165,10 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Yqd-uu-Daf">
-                                <rect key="frame" x="20" y="471" width="374" height="391"/>
+                                <rect key="frame" x="20" y="536" width="374" height="326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="391" id="nqI-Dm-38b"/>
+                                    <constraint firstAttribute="height" constant="326" id="Fju-o8-Kqg"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -191,6 +191,12 @@
                                     <action selector="weatherByCurrentLocation:" destination="kGJ-AN-eVN" eventType="touchUpInside" id="dyz-qG-UuG"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clear sky" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdI-Xg-c9c">
+                                <rect key="frame" x="0.0" y="293" width="414" height="39"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="TdS-oL-7BI"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -199,20 +205,23 @@
                             <constraint firstItem="Yqd-uu-Daf" firstAttribute="top" secondItem="5JO-T0-Cmr" secondAttribute="bottom" constant="8" id="4wc-8J-PpR"/>
                             <constraint firstItem="clh-Fp-I0I" firstAttribute="top" secondItem="TdS-oL-7BI" secondAttribute="top" constant="16" id="66M-qG-OfL"/>
                             <constraint firstItem="TdS-oL-7BI" firstAttribute="trailing" secondItem="Yqd-uu-Daf" secondAttribute="trailing" constant="20" id="F1f-6H-30X"/>
+                            <constraint firstItem="qdI-Xg-c9c" firstAttribute="leading" secondItem="TdS-oL-7BI" secondAttribute="leading" id="JMO-ia-fAd"/>
                             <constraint firstItem="Yqd-uu-Daf" firstAttribute="leading" secondItem="TdS-oL-7BI" secondAttribute="leading" constant="20" id="MfR-eb-KBZ"/>
                             <constraint firstItem="TdS-oL-7BI" firstAttribute="trailing" secondItem="Yqd-uu-Daf" secondAttribute="trailing" constant="20" id="Mfa-Vy-kOO"/>
                             <constraint firstItem="TdS-oL-7BI" firstAttribute="trailing" secondItem="5JO-T0-Cmr" secondAttribute="trailing" constant="20" id="PnA-u7-eCH"/>
                             <constraint firstItem="Yqd-uu-Daf" firstAttribute="bottom" secondItem="TdS-oL-7BI" secondAttribute="bottom" id="TEf-S8-wDR"/>
-                            <constraint firstItem="5JO-T0-Cmr" firstAttribute="top" secondItem="r3m-tg-GmR" secondAttribute="bottom" constant="26" id="U5J-m1-eda"/>
                             <constraint firstItem="Yqd-uu-Daf" firstAttribute="leading" secondItem="TdS-oL-7BI" secondAttribute="leading" constant="20" id="WYD-uz-sou"/>
                             <constraint firstItem="Hio-J1-1hC" firstAttribute="leading" secondItem="TdS-oL-7BI" secondAttribute="leading" id="XRF-4s-Jyu"/>
                             <constraint firstItem="5JO-T0-Cmr" firstAttribute="leading" secondItem="TdS-oL-7BI" secondAttribute="leading" constant="20" id="bCn-XZ-aHd"/>
                             <constraint firstItem="r3m-tg-GmR" firstAttribute="leading" secondItem="TdS-oL-7BI" secondAttribute="leading" id="eCc-lD-zZm"/>
                             <constraint firstItem="r3m-tg-GmR" firstAttribute="trailing" secondItem="TdS-oL-7BI" secondAttribute="trailing" id="gUN-DQ-6d9"/>
+                            <constraint firstItem="qdI-Xg-c9c" firstAttribute="top" secondItem="r3m-tg-GmR" secondAttribute="bottom" constant="8" symbolic="YES" id="hzv-Pf-ALQ"/>
                             <constraint firstItem="clh-Fp-I0I" firstAttribute="leading" secondItem="TdS-oL-7BI" secondAttribute="leading" constant="183.5" id="mGG-VR-lY4"/>
                             <constraint firstItem="TdS-oL-7BI" firstAttribute="trailing" secondItem="clh-Fp-I0I" secondAttribute="trailing" constant="183.5" id="uCP-1n-4OQ"/>
                             <constraint firstItem="Hio-J1-1hC" firstAttribute="trailing" secondItem="TdS-oL-7BI" secondAttribute="trailing" id="yCj-hp-lzo"/>
                             <constraint firstItem="r3m-tg-GmR" firstAttribute="top" secondItem="Hio-J1-1hC" secondAttribute="bottom" constant="22" id="zFa-yC-Vi8"/>
+                            <constraint firstItem="qdI-Xg-c9c" firstAttribute="trailing" secondItem="TdS-oL-7BI" secondAttribute="trailing" id="zME-k7-jMF"/>
+                            <constraint firstItem="5JO-T0-Cmr" firstAttribute="top" secondItem="qdI-Xg-c9c" secondAttribute="bottom" constant="32" id="zYm-i0-e7p"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="oLS-4d-sOI">
@@ -247,6 +256,7 @@
                         <outlet property="hourlyView" destination="5JO-T0-Cmr" id="4eF-wF-Cbh"/>
                         <outlet property="searchWeather" destination="pai-fu-AVh" id="wCC-c9-tBS"/>
                         <outlet property="temperatureLabel" destination="r3m-tg-GmR" id="x2l-pf-JBx"/>
+                        <outlet property="weatherDescription" destination="qdI-Xg-c9c" id="F5C-7m-uLC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vub-O0-xKK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

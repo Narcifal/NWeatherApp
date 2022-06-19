@@ -36,7 +36,7 @@ class WelcomeViewController: UIViewController {
     
     //SignIn with Google
     
-    @IBAction func googleSignIn(_ sender: UIButton) {
+    @IBAction private func googleSignIn(_ sender: UIButton) {
         if(GIDSignIn.sharedInstance()?.currentUser != nil)
         {
             //LogOut Google manager
@@ -56,7 +56,7 @@ class WelcomeViewController: UIViewController {
     
     //SignIn with Facebook
     
-    @IBAction func facebookSignIn(_ sender: UIButton) {
+    @IBAction  func facebookSignIn(_ sender: UIButton) {
         facebookLogInOut()
     }
     
@@ -83,7 +83,7 @@ class WelcomeViewController: UIViewController {
     
     //Get Facebook result data
     
-    func facebookLoginResult() {
+    private func facebookLoginResult() {
         let token = AccessToken.current?.tokenString
         let request = FBSDKLoginKit.GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], tokenString: token, version: nil, httpMethod: .get)
 
@@ -95,7 +95,7 @@ class WelcomeViewController: UIViewController {
     
     //Change background image to random
     
-    func randomBackgroundImage() {
+    private func randomBackgroundImage() {
         let randomNumber = Int.random(in: 0..<6)
         
         switch(randomNumber) {

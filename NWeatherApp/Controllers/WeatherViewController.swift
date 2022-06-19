@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  WeatherViewController.swift
 //  NWeatherApp
 //
 //  Created by Denys Niestierov on 14.06.2022.
@@ -14,6 +14,8 @@ final class WeatherViewController: UIViewController {
     @IBOutlet private weak var cityLabel: UILabel!
     //Temperature label
     @IBOutlet private weak var temperatureLabel: UILabel!
+    //Weather description label
+    @IBOutlet weak var weatherDescription: UILabel!
     //Hourly weather view
     @IBOutlet private weak var hourlyView: UIView!
     //Hourly weather collection
@@ -28,6 +30,7 @@ final class WeatherViewController: UIViewController {
     //Recieved weather data
     private var recievedWeatherData: WeatherNameData? = nil
     
+    //Managers
     private var weatherManager = WeatherManager()
     private var locationManager = CLLocationManager()
     
@@ -67,13 +70,11 @@ final class WeatherViewController: UIViewController {
         
         //Request user location
         getCurrentLocation()
-        
-        //randomBackgroundImage()
     }
     
     
     //Method to get user location
-    func getCurrentLocation() {
+    private func getCurrentLocation() {
         // Ask for Authorisation from the User.
         self.locationManager.requestAlwaysAuthorization()
 
@@ -94,7 +95,7 @@ final class WeatherViewController: UIViewController {
     
     
     //Search weather data for your location
-    @IBAction func weatherByCurrentLocation(_ sender: UIButton) {
+    @IBAction private func weatherByCurrentLocation(_ sender: UIButton) {
         //User location coordinates
         let latitude = locationManager.location?.coordinate.latitude
         let longitude = locationManager.location?.coordinate.longitude
@@ -118,6 +119,7 @@ final class WeatherViewController: UIViewController {
         self.temperatureLabel.text = String(
             format: "%.1f",
             data.current.temp) + Constants.Temperature.degreeCelsius
+        self.weatherDescription.text = data.current.weather[0].description.capitalizingFirstLetter()
         
         //Reload data to change view values
         self.dailyView.reloadData()
@@ -184,7 +186,7 @@ extension WeatherViewController: UICollectionViewDataSource {
         + Constants.Temperature.degreeCelsius
         
         //Set condition image
-        let hourlyImage = UIImage(named: hourly?.weather[0].icon ?? "01d")?.resized(to: CGSize(width: 75, height: 75))
+        let hourlyImage = UIImage(named: hourly?.weather[0].icon ?? "01d")?.resized(to: CGSize(width: 65, height: 65))
 
         //Cell settings
         cell.configure(image: hourlyImage,
