@@ -9,7 +9,7 @@ import Foundation
 
 extension Double {
 
-    func doubleToFormattedString(dot: String = ".1") -> String {
+    func toFormattedString(dot: String = ".1") -> String {
         return String(format: "%\(dot)f", self)
     }
     

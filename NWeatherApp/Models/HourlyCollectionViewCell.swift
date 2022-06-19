@@ -19,7 +19,7 @@ class HourlyCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
     
-    public func configure(image: UIImage, time: String, temperature: String) {
+    public func configure(image: UIImage?, time: String, temperature: String) {
         imageView.image = image
         self.time.text = time
         self.temperature.text = temperature

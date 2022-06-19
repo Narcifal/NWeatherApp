@@ -27,6 +27,7 @@ struct Daily: Codable {
 struct Weather: Codable {
     let id: Int
     let description: String
+    let icon: String
 }
 
 struct Temp: Codable {

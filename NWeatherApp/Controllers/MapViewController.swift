@@ -21,7 +21,7 @@ class MapViewController: UIViewController{
         //Google map view settings
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
-        //mapView.delegate = self
+        mapView.delegate = self
         
         //Address label background alpha
         addressLabel.backgroundColor = .lightGray.withAlphaComponent(0.8)
@@ -42,7 +42,8 @@ class MapViewController: UIViewController{
             //Load WeatherViewController
             navigationController?.popViewController(animated: true)
         } else {
-            print("Error")
+            let alertController = Popup().googleMapsAddressIsNil()
+            present(alertController, animated: true, completion: nil)
         }
     }
     

@@ -104,7 +104,7 @@ final class WeatherViewController: UIViewController {
             weatherManager.fetchWeather(latitude: latitude ?? 0.0,
                                         longitude: longitude ?? 0.0)
         } else {
-            let alertController: UIAlertController = Popup().weatherByCurrentLocationWasBlocked()
+            let alertController = Popup().weatherByCurrentLocationWasBlocked()
             present(alertController, animated: true, completion: nil)
         }
     }
@@ -115,7 +115,9 @@ final class WeatherViewController: UIViewController {
         self.recievedWeatherData = data
         
         self.cityLabel.text = data.timezone
-        self.temperatureLabel.text = String(format: "%.1f", data.current.temp)
+        self.temperatureLabel.text = String(
+            format: "%.1f",
+            data.current.temp) + Constants.Temperature.degreeCelsius
         
         //Reload data to change view values
         self.dailyView.reloadData()
@@ -123,7 +125,7 @@ final class WeatherViewController: UIViewController {
     }
     
     
-    //Prepare for segue
+    //Prepare for segue (To MapViewController)
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == Constants.Segues.goToGoogleMaps) {
             let mapViewController = segue.destination as? MapViewController
@@ -178,17 +180,27 @@ extension WeatherViewController: UICollectionViewDataSource {
         }
         
         //Double formatted to String
-        let hourlyTemp = (hourly?.temp.doubleToFormattedString() ?? "")
+        let hourlyTemp = (hourly?.temp.toFormattedString() ?? "")
         + Constants.Temperature.degreeCelsius
         
+        //Set condition image
+        let hourlyImage = UIImage(named: hourly?.weather[0].icon ?? "01d")?.resized(to: CGSize(width: 50, height: 50))
+
         //Cell settings
-        cell.configure(image: UIImage(named: "facebookLogo-40")!,
+        cell.configure(image: hourlyImage,
                        time: hourlyTime,
                        temperature: hourlyTemp)
 
         return cell
     }
-     
+}
+
+extension UIImage {
+    func resized(to size: CGSize) -> UIImage {
+        return UIGraphicsImageRenderer(size: size).image { _ in
+            draw(in: CGRect(origin: .zero, size: size))
+        }
+    }
 }
 
 //MARK: - UITableViewDelegate
@@ -224,16 +236,22 @@ extension WeatherViewController: UITableViewDataSource {
         var weatherDay = daily?.dt.toString(dateFormatter: "EE") ?? ""
         
         //Doubles formatted to String
-        let minTemp = daily?.temp.min.doubleToFormattedString() ?? ""
-        let maxTemp = daily?.temp.max.doubleToFormattedString() ?? ""
+        let minTemp = "Min:\n" + (daily?.temp.min.toFormattedString() ?? "")
+        let maxTemp = "Max:\n" + (daily?.temp.max.toFormattedString() ?? "")
 
         //Check if current cell is the first element
         if indexPath.row == 0 {
             weatherDay = "Current"
         }
+
+        //Set condition image
+        let dailyImage = UIImage(named: daily?.weather[0].icon ?? "01d")
         
         //Cell settings
-        cell.configure(image: UIImage(named: "googleLogo-40")!, day: weatherDay, max: maxTemp, min: minTemp)
+        cell.configure(image: dailyImage,
+                       day: weatherDay,
+                       max: maxTemp,
+                       min: minTemp)
         
         //Cell transparent background color
         cell.layer.backgroundColor = UIColor.clear.cgColor
