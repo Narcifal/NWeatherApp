@@ -25,16 +25,17 @@ final class WeatherViewController: UIViewController {
     private var weatherManager = WeatherManager()
     private var locationManager = CLLocationManager()
     
+    //MARK: - Life Cycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionViewSettings()
+        setupCollectionView()
         
-        tableViewSettings()
+        setupTableView()
         
-        textFieldSettings()
+        setupTextField()
         
-        backgroundImageSettings()
+        setupBackgroundImage()
         
         //Weather manager delegate
         weatherManager.delegate = self
@@ -98,7 +99,6 @@ final class WeatherViewController: UIViewController {
     }
     
     //MARK: - IBActions -
-    
     //Search weather data for your location
     @IBAction private func weatherByCurrentLocation(_ sender: UIButton) {
         //User location coordinates
@@ -118,7 +118,6 @@ final class WeatherViewController: UIViewController {
 }
 
 //MARK: - UICollectionViewDataSource
-
 extension WeatherViewController: UICollectionViewDataSource {
     
     //Amount of cells
@@ -163,7 +162,6 @@ extension WeatherViewController: UICollectionViewDataSource {
 }
 
 //MARK: - UITableViewDataSource
-
 extension WeatherViewController: UITableViewDataSource {
     
     //Amount of cells
@@ -213,9 +211,7 @@ extension WeatherViewController: UITableViewDataSource {
     }
 }
 
-
 //MARK: - UITextFieldDelegate
-
 extension WeatherViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -242,15 +238,13 @@ extension WeatherViewController: UITextFieldDelegate {
     }
 }
 
-
 //MARK: - WeatherManagerDelegate
-
 extension WeatherViewController: WeatherManagerDelegate {
     
     //Protocol method, loaded when we decode the data
     func didUpdateWeather(_ weatherManager: WeatherManager, data: WeatherNameData) {
         DispatchQueue.main.async {
-            //....
+            //Configure view controller
             self.configure(with: data)
         }
     }
@@ -260,9 +254,7 @@ extension WeatherViewController: WeatherManagerDelegate {
     }
 }
 
-
 //MARK: - CLLocationManagerDelegate
-
 extension WeatherViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
@@ -273,32 +265,33 @@ extension WeatherViewController: CLLocationManagerDelegate {
 }
 
 //MARK: MapViewController settings
-
 private extension WeatherViewController {
-    func collectionViewSettings() {
+    func setupCollectionView() {
         hourlyCollection.register(
             HourlyCollectionViewCell.nib(),
             forCellWithReuseIdentifier: Constants.Cells.hourly)
         hourlyCollection.dataSource = self
-        hourlyView.backgroundColor = UIColor(named: "batTintColor")!.withAlphaComponent(0.7)
+        hourlyView.backgroundColor = UIColor(
+            named: "batTintColor")?.withAlphaComponent(0.7) ?? .white
     }
 
-    func tableViewSettings() {
+    func setupTableView() {
         dailyView.register(
             DailyTableViewCell.nib(),
             forCellReuseIdentifier: Constants.Cells.daily)
         dailyView.dataSource = self
-        dailyView.backgroundColor = UIColor(named: "batTintColor")!.withAlphaComponent(0.7)
+        dailyView.backgroundColor = UIColor(
+            named: "batTintColor")?.withAlphaComponent(0.7) ?? .white
     }
     
-    func textFieldSettings() {
+    func setupTextField() {
         searchWeather.delegate = self
         searchWeather.backgroundColor = UIColor.white.withAlphaComponent(0.3)
         searchWeather.layer.cornerRadius = 12.0
         searchWeather.clipsToBounds = true
     }
     
-    func backgroundImageSettings() {
+    func setupBackgroundImage() {
         backgroundImage.image = UIImage(
             named: Constants.BackgroundImages.greenLeaves)
         backgroundImage.alpha = 0.7

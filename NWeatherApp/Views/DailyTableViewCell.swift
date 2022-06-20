@@ -7,18 +7,13 @@
 
 import UIKit
 
-class DailyTableViewCell: UITableViewCell {
+final class DailyTableViewCell: UITableViewCell {
 
     //MARK: - IBOutlets -
-    @IBOutlet weak var dayLabel: UILabel!
-    @IBOutlet weak var minTemp: UILabel!
-    @IBOutlet weak var maxTemp: UILabel!
-    @IBOutlet weak var weatherImage: UIImageView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    @IBOutlet private weak var dayLabel: UILabel!
+    @IBOutlet private weak var minTemp: UILabel!
+    @IBOutlet private weak var maxTemp: UILabel!
+    @IBOutlet private weak var weatherImage: UIImageView!
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -27,7 +22,7 @@ class DailyTableViewCell: UITableViewCell {
     }
     
     //MARK: - Internal -
-    internal func configure(image: UIImage?, day: String, max: String, min: String) {
+    func configure(image: UIImage?, day: String, max: String, min: String) {
         weatherImage.image = image
         dayLabel.text = day
         minTemp.text = min

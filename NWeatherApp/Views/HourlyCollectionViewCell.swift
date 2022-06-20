@@ -7,20 +7,15 @@
 
 import UIKit
 
-class HourlyCollectionViewCell: UICollectionViewCell {
+final class HourlyCollectionViewCell: UICollectionViewCell {
     
     //MARK: - IBOutlets -
-    @IBOutlet var imageView: UIImageView!
-    @IBOutlet weak var time: UILabel!
-    @IBOutlet weak var temperature: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    @IBOutlet private var imageView: UIImageView!
+    @IBOutlet private weak var time: UILabel!
+    @IBOutlet private weak var temperature: UILabel!
     
     //MARK: - Internal -
-    internal func configure(image: UIImage?, time: String, temperature: String) {
+    func configure(image: UIImage?, time: String, temperature: String) {
         imageView.image = image
         self.time.text = time
         self.temperature.text = temperature

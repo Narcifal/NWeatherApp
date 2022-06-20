@@ -15,6 +15,7 @@ final class WelcomeViewController: UIViewController {
     @IBOutlet private weak var googleButton: UIButton!
     @IBOutlet private weak var facebookLoginButton: UIButton!
     
+    //MARK: - Life Cycle -
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,30 +51,34 @@ final class WelcomeViewController: UIViewController {
     }
     
     //SignIn with Facebook
-    @IBAction  private func facebookSignIn(_ sender: UIButton) {
-        func facebookLogInOut() {
-            //Check if user logged in
-            if let token = AccessToken.current, !token.isExpired {
-                facebookLoginResult()
-                
-                //LogOut Facebook manager
-                LoginManager().logOut()
-                
-                //Display alert controller
-                let alertController =
-                    AddingAlertController().successfullySignedOutPopUp(with: "Facebook")
-                present(alertController, animated: true, completion: nil)
-            } else {
-                //LogIn Facebook manager
-                LoginManager().logIn()
-            }
+    @IBAction private func facebookSignIn(_ sender: UIButton) {
+        //Check if user logged in
+        if let token = AccessToken.current, !token.isExpired {
+            facebookLoginResult()
+            
+            //LogOut Facebook manager
+            LoginManager().logOut()
+            
+            //Display alert controller
+            let alertController =
+                AddingAlertController().successfullySignedOutPopUp(with: "Facebook")
+            present(alertController, animated: true, completion: nil)
+        } else {
+            //LogIn Facebook manager
+            LoginManager().logIn()
         }
     }
     
+    //MARK: - Private -
     //Get Facebook result data
     private func facebookLoginResult() {
         let token = AccessToken.current?.tokenString
-        let request = FBSDKLoginKit.GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], tokenString: token, version: nil, httpMethod: .get)
+        let request = FBSDKLoginKit.GraphRequest(
+            graphPath: "me",
+            parameters: ["fields": "email, name"],
+            tokenString: token,
+            version: nil,
+            httpMethod: .get)
 
         request.start { connection, result, error in
             print(result as Any)
@@ -88,9 +93,8 @@ final class WelcomeViewController: UIViewController {
                       Constants.BackgroundImages.riverMountain,
                       Constants.BackgroundImages.sunsetField,
                       Constants.BackgroundImages.twilightMoon]
-        
-        backgroundImage.image = UIImage(named:
-                                            images.randomElement() ?? Constants.BackgroundImages.greenLeaves)
+        let randomImage = UIImage(named:
+                                    images.randomElement() ?? Constants.BackgroundImages.greenLeaves)
+        backgroundImage.image = randomImage
     }
-
 }

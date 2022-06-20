@@ -100,8 +100,6 @@
 			children = (
 				9A89CD48285CC887000239A4 /* WeatherCoordinatesData.swift */,
 				9A89CD47285CC887000239A4 /* WeatherNameData.swift */,
-				9A89CD4C285CCD38000239A4 /* HourlyCollectionViewCell.swift */,
-				9A5D77FF285CD87B006CF176 /* DailyTableViewCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -131,7 +129,9 @@
 				9AEF79EC28590CF6002DC18F /* Main.storyboard */,
 				9AEF79F128590CF7002DC18F /* LaunchScreen.storyboard */,
 				9A5D7800285CD87B006CF176 /* DailyTableViewCell.xib */,
+				9A5D77FF285CD87B006CF176 /* DailyTableViewCell.swift */,
 				9A89CD4D285CCD38000239A4 /* HourlyCollectionViewCell.xib */,
+				9A89CD4C285CCD38000239A4 /* HourlyCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

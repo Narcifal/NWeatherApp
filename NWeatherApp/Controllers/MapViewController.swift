@@ -19,13 +19,14 @@ final class MapViewController: UIViewController{
     private var weatherManager = WeatherManager()
     var didUpdateWeather: ((_ weather: WeatherNameData?) -> Void)?
     
+    //MARK: - Life Cycle -
     override func viewDidLoad() {
         super.viewDidLoad()
 
         //Google map view delegate
         mapView.delegate = self
         
-        addressLabelSettings()
+        setupAddressLabel()
         
         //WeatherManager delegate
         weatherManager.delegate = self
@@ -49,6 +50,7 @@ final class MapViewController: UIViewController{
         }
     }
     
+    //MARK: - Private -
     //Get coordinates
     private func reverseGeocodeCoordinate(_ coordinate: CLLocationCoordinate2D) {
         
@@ -73,7 +75,6 @@ final class MapViewController: UIViewController{
 }
 
 // MARK: - GMSMapViewDelegate
-
 extension MapViewController: GMSMapViewDelegate {
     
     //Called each time the map stops moving and settles in a new position.
@@ -84,7 +85,6 @@ extension MapViewController: GMSMapViewDelegate {
 }
 
 //MARK: - WeatherManagerDelegate
-
 extension MapViewController: WeatherManagerDelegate {
     
     //Protocol method loaded when we decode the data
@@ -101,9 +101,8 @@ extension MapViewController: WeatherManagerDelegate {
 }
 
 //MARK: MapViewController settings
-
 private extension MapViewController{
-    func addressLabelSettings() {
+    func setupAddressLabel() {
         addressLabel.backgroundColor = .lightGray.withAlphaComponent(0.8)
     }
 }
