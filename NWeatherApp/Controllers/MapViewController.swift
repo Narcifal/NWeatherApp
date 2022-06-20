@@ -44,9 +44,11 @@ final class MapViewController: UIViewController{
             navigationController?.popViewController(animated: true)
         } else {
             //Display alert controller
-            let alertController =
-                AddingAlertController().googleMapsAddressIsNil()
-            present(alertController, animated: true, completion: nil)
+            present(
+                showAlert(
+                    with: "You have not selected a specific location. \n point to the desired location on the map)"),
+                animated: true,
+                completion: nil)
         }
     }
     
@@ -66,7 +68,7 @@ final class MapViewController: UIViewController{
             
             //Sets the text of the addressLabel to the address returned by the geocoder.
             self.addressLabel.text = lines.joined(separator: "\n")
-            
+
             //Remembering longitude and latitude coordinates
             self.longitude = address.coordinate.longitude
             self.latitude = address.coordinate.latitude

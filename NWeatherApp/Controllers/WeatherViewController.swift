@@ -110,9 +110,11 @@ final class WeatherViewController: UIViewController {
             weatherManager.fetchWeather(latitude: latitude ?? 0.0,
                                         longitude: longitude ?? 0.0)
         } else {
-            let alertController =
-                AddingAlertController().weatherByCurrentLocationWasBlocked()
-            present(alertController, animated: true, completion: nil)
+            present(
+                showAlert(
+                    with: "You have banned the use of your location."),
+                animated: true,
+                completion: nil)
         }
     }
 }
@@ -250,7 +252,13 @@ extension WeatherViewController: WeatherManagerDelegate {
     }
     
     func didFailWithError(error: Error) {
-        print(error)
+        DispatchQueue.main.async { [weak self] in
+            self?.present(
+                self!.showAlert(
+                    with: "The location was not found. \n Try again."),
+                animated: true,
+                completion: nil)
+        }
     }
 }
 

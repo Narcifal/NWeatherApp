@@ -41,9 +41,11 @@ final class WelcomeViewController: UIViewController {
             GIDSignIn.sharedInstance().signOut()
             
             //Display alert controller
-            let alertController =
-                AddingAlertController().successfullySignedOutPopUp(with: "Google")
-            present(alertController, animated: true, completion: nil)
+            present(
+                showAlert(
+                    with: "You have successfully Logged Out into your Google account!"),
+                animated: true,
+                completion: nil)
         } else {
             //LogIn Google manager
             GIDSignIn.sharedInstance().signIn()
@@ -60,9 +62,11 @@ final class WelcomeViewController: UIViewController {
             LoginManager().logOut()
             
             //Display alert controller
-            let alertController =
-                AddingAlertController().successfullySignedOutPopUp(with: "Facebook")
-            present(alertController, animated: true, completion: nil)
+            present(
+                showAlert(
+                    with: "You have successfully Logged Out into your Facebook account!"),
+                animated: true,
+                completion: nil)
         } else {
             //LogIn Facebook manager
             LoginManager().logIn()
