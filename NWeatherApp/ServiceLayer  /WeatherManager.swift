@@ -63,8 +63,6 @@ struct WeatherManager {
         }
     }
     
-    //---------------------------------------------------------------------
-    
     func performWeatherRequest(with urlString: String) {
         
         if let url = URL(string: urlString) {
