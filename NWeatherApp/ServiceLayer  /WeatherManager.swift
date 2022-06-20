@@ -73,6 +73,7 @@ struct WeatherManager {
             let decodateData = try decoder.decode(expecting, from: data)
             return decodateData
         } catch {
+            self.delegate?.didFailWithError(error: error)
             return nil
         }
     }

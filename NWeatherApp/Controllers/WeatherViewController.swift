@@ -253,6 +253,7 @@ extension WeatherViewController: WeatherManagerDelegate {
     
     func didFailWithError(error: Error) {
         DispatchQueue.main.async { [weak self] in
+            print("location was not found")
             self?.present(
                 self!.showAlert(
                     with: "The location was not found. \n Try again."),
