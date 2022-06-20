@@ -10,68 +10,72 @@ import CoreLocation
 
 final class WeatherViewController: UIViewController {
 
-    //City label
+    //MARK: - IBOutlets -
     @IBOutlet private weak var cityLabel: UILabel!
-    //Temperature label
     @IBOutlet private weak var temperatureLabel: UILabel!
-    //Weather description label
-    @IBOutlet weak var weatherDescription: UILabel!
-    //Hourly weather view
+    @IBOutlet private weak var weatherDescription: UILabel!
     @IBOutlet private weak var hourlyView: UIView!
-    //Hourly weather collection
     @IBOutlet private weak var hourlyCollection: UICollectionView!
-    //WeatherViewController background image
     @IBOutlet private weak var backgroundImage: UIImageView!
-    //Daily table view
     @IBOutlet private weak var dailyView: UITableView!
-    //Search weathe textField
     @IBOutlet private weak var searchWeather: UITextField!
     
-    //Recieved weather data
+    //MARK: - Variables -
     private var recievedWeatherData: WeatherNameData? = nil
-    
-    //Managers
     private var weatherManager = WeatherManager()
     private var locationManager = CLLocationManager()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Collection settings
-        hourlyCollection.register(
-            HourlyCollectionViewCell.nib(),
-            forCellWithReuseIdentifier: Constants.Cells.hourly)
-        hourlyCollection.delegate = self
-        hourlyCollection.dataSource = self
-        hourlyView.backgroundColor = UIColor(named: "batTintColor")!.withAlphaComponent(0.7)
+        collectionViewSettings()
         
-        //Table view settings
-        dailyView.register(
-            DailyTableViewCell.nib(),
-            forCellReuseIdentifier: Constants.Cells.daily)
-        dailyView.delegate = self
-        dailyView.dataSource = self
-        dailyView.backgroundColor = UIColor(named: "batTintColor")!.withAlphaComponent(0.7)
-
+        tableViewSettings()
+        
+        textFieldSettings()
+        
+        backgroundImageSettings()
+        
         //Weather manager delegate
         weatherManager.delegate = self
         
-        //Text field settings
-        searchWeather.delegate = self
-        searchWeather.backgroundColor = UIColor.white.withAlphaComponent(0.3)
-        searchWeather.layer.cornerRadius = 12.0
-        searchWeather.clipsToBounds = true
-        
-        //View controller background image settings
-        backgroundImage.image = UIImage(
-            named: Constants.BackgroundImages.greenLeaves)
-        backgroundImage.alpha = 0.7
-        
-        //Request user location
         getCurrentLocation()
     }
     
+    //MARK: - Internal -
+    //Configure view controller after getting decoded data
+    internal func configure(with data: WeatherNameData) {
+        self.recievedWeatherData = data
+        
+        if data.timezone != "Etc/GMT"{
+            self.cityLabel.text = data.timezone
+        } else {
+            self.cityLabel.text = "Unknown"
+        }
+        
+        self.temperatureLabel.text = String(
+            format: "%.1f",
+            data.current.temp) + Constants.Temperature.degreeCelsius
+        self.weatherDescription.text = data.current.weather[0].description.capitalizingFirstLetter()
+        
+        //Reload data to change view values
+        self.dailyView.reloadData()
+        self.hourlyCollection.reloadData()
+    }
+    
+    //MARK: - Life Cycle -
+    //Prepare for segue (To MapViewController)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == Constants.Segues.goToGoogleMaps) {
+            let mapViewController = segue.destination as? MapViewController
+            
+            //Call a configure method ....
+            mapViewController?.didUpdateWeather = { [weak self] weather in
+                guard let weather = weather else { return }
+                self?.configure(with: weather)
+            }
+        }
+    }
     
     //Method to get user location
     private func getCurrentLocation() {
@@ -93,6 +97,7 @@ final class WeatherViewController: UIViewController {
         }
     }
     
+    //MARK: - IBActions -
     
     //Search weather data for your location
     @IBAction private func weatherByCurrentLocation(_ sender: UIButton) {
@@ -110,54 +115,7 @@ final class WeatherViewController: UIViewController {
             present(alertController, animated: true, completion: nil)
         }
     }
-    
-
-    //Configure view controller after getting decoded data
-    func configure(with data: WeatherNameData) {
-        self.recievedWeatherData = data
-        
-        if data.timezone != "Etc/GMT"{
-            self.cityLabel.text = data.timezone
-        } else {
-            self.cityLabel.text = "Unknown"
-        }
-        
-        self.temperatureLabel.text = String(
-            format: "%.1f",
-            data.current.temp) + Constants.Temperature.degreeCelsius
-        self.weatherDescription.text = data.current.weather[0].description.capitalizingFirstLetter()
-        
-        //Reload data to change view values
-        self.dailyView.reloadData()
-        self.hourlyCollection.reloadData()
-    }
-    
-    
-    //Prepare for segue (To MapViewController)
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == Constants.Segues.goToGoogleMaps) {
-            let mapViewController = segue.destination as? MapViewController
-            
-            //Call a configure method ....
-            mapViewController?.didUpdateWeather = { [weak self] weather in
-                guard let weather = weather else { return }
-                self?.configure(with: weather)
-            }
-        }
-    }
 }
-
-
-//MARK: - UICollectionViewDelegate
-
-extension WeatherViewController: UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("UICollectionViewDelegate")
-    }
-    
-}
-
 
 //MARK: - UICollectionViewDataSource
 
@@ -192,7 +150,8 @@ extension WeatherViewController: UICollectionViewDataSource {
         + Constants.Temperature.degreeCelsius
         
         //Set condition image
-        let hourlyImage = UIImage(named: hourly?.weather[0].icon ?? "01d")?.resized(to: CGSize(width: 55, height: 55))
+        let hourlyImage = UIImage(named:
+                                    hourly?.weather[0].icon ?? "01d")?.resized(to: CGSize(width: 55, height: 55))
 
         //Cell settings
         cell.configure(image: hourlyImage,
@@ -202,18 +161,6 @@ extension WeatherViewController: UICollectionViewDataSource {
         return cell
     }
 }
-
-
-//MARK: - UITableViewDelegate
-
-extension WeatherViewController: UITableViewDelegate {
-    
-    //Method to operate with cell action
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("You tapped cell number \(indexPath.row).")
-    }
-}
-
 
 //MARK: - UITableViewDataSource
 
@@ -250,7 +197,8 @@ extension WeatherViewController: UITableViewDataSource {
         }
 
         //Set condition image
-        let dailyImage = UIImage(named: daily?.weather[0].icon ?? "01d")?.resized(to: CGSize(width: 75, height: 75))
+        let dailyImage = UIImage(named:
+                                    daily?.weather[0].icon ?? "01d")?.resized(to: CGSize(width: 75, height: 75))
         
         //Cell settings
         cell.configure(image: dailyImage,
@@ -310,7 +258,6 @@ extension WeatherViewController: WeatherManagerDelegate {
     func didFailWithError(error: Error) {
         print(error)
     }
-    
 }
 
 
@@ -322,5 +269,38 @@ extension WeatherViewController: CLLocationManagerDelegate {
 
         //Call fetchWeather method to load weather data
         weatherManager.fetchWeather(latitude: locValue.longitude, longitude: locValue.latitude)
+    }
+}
+
+//MARK: MapViewController settings
+
+private extension WeatherViewController {
+    func collectionViewSettings() {
+        hourlyCollection.register(
+            HourlyCollectionViewCell.nib(),
+            forCellWithReuseIdentifier: Constants.Cells.hourly)
+        hourlyCollection.dataSource = self
+        hourlyView.backgroundColor = UIColor(named: "batTintColor")!.withAlphaComponent(0.7)
+    }
+
+    func tableViewSettings() {
+        dailyView.register(
+            DailyTableViewCell.nib(),
+            forCellReuseIdentifier: Constants.Cells.daily)
+        dailyView.dataSource = self
+        dailyView.backgroundColor = UIColor(named: "batTintColor")!.withAlphaComponent(0.7)
+    }
+    
+    func textFieldSettings() {
+        searchWeather.delegate = self
+        searchWeather.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+        searchWeather.layer.cornerRadius = 12.0
+        searchWeather.clipsToBounds = true
+    }
+    
+    func backgroundImageSettings() {
+        backgroundImage.image = UIImage(
+            named: Constants.BackgroundImages.greenLeaves)
+        backgroundImage.alpha = 0.7
     }
 }

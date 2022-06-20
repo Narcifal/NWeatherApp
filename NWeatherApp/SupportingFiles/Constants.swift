@@ -15,8 +15,8 @@ struct Constants {
     }
     
     struct BackgroundImages {
-        static let twilightMoon = "twilightMoonBackround"
-        static let sunsetField = "sunsetFieldBackround"
+        static let twilightMoon = "twilightMoonBackground"
+        static let sunsetField = "sunsetFieldBackground"
         static let riverMountain = "riverMountainBackground"
         static let greenLeaves = "greenLeavesBackground"
         static let fallingStar = "fallingStarBackground"

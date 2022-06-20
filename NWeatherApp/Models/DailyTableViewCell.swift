@@ -9,11 +9,10 @@ import UIKit
 
 class DailyTableViewCell: UITableViewCell {
 
+    //MARK: - IBOutlets -
     @IBOutlet weak var dayLabel: UILabel!
-    
     @IBOutlet weak var minTemp: UILabel!
     @IBOutlet weak var maxTemp: UILabel!
-    
     @IBOutlet weak var weatherImage: UIImageView!
     
     override func awakeFromNib() {
@@ -27,7 +26,8 @@ class DailyTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    public func configure(image: UIImage?, day: String, max: String, min: String) {
+    //MARK: - Internal -
+    internal func configure(image: UIImage?, day: String, max: String, min: String) {
         weatherImage.image = image
         dayLabel.text = day
         minTemp.text = min

@@ -1,3 +1,10 @@
+//
+//  WeatherNameData.swift
+//  NWeatherApp
+//
+//  Created by Denys Niestierov on 15.06.2022.
+//
+
 import Foundation
 
 struct WeatherNameData: Codable {

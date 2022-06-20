@@ -5,24 +5,21 @@
 //  Created by Denys Niestierov on 14.06.2022.
 //
 
-import UIKit
 import FBSDKLoginKit
 import GoogleSignIn
 
+final class WelcomeViewController: UIViewController {
 
-class WelcomeViewController: UIViewController {
-
+    //MARK: - IBOutlets -
     @IBOutlet private var backgroundImage: UIImageView!
-
     @IBOutlet private weak var googleButton: UIButton!
     @IBOutlet private weak var facebookLoginButton: UIButton!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Load random background image
-        randomBackgroundImage()
+        //Set a random background image
+        setRandomBackgroundImage()
 
         //LogOut from Facebook on load
         LoginManager().logOut()
@@ -32,10 +29,10 @@ class WelcomeViewController: UIViewController {
         
         GIDSignIn.sharedInstance()?.presentingViewController = self
     }
-
+    
+    //MARK: - IBActions -
     
     //SignIn with Google
-    
     @IBAction private func googleSignIn(_ sender: UIButton) {
         if(GIDSignIn.sharedInstance()?.currentUser != nil)
         {
@@ -46,45 +43,34 @@ class WelcomeViewController: UIViewController {
             let alertController =
                 AddingAlertController().successfullySignedOutPopUp(with: "Google")
             present(alertController, animated: true, completion: nil)
-        }
-        else
-        {
+        } else {
             //LogIn Google manager
             GIDSignIn.sharedInstance().signIn()
         }
     }
     
-    
     //SignIn with Facebook
-    
-    @IBAction  func facebookSignIn(_ sender: UIButton) {
-        facebookLogInOut()
-    }
-    
-    
-    //Facebook user auth check
-    
-    func facebookLogInOut() {
-        //Check if user logged in
-        if let token = AccessToken.current, !token.isExpired {
-            facebookLoginResult()
-            
-            //LogOut Facebook manager
-            LoginManager().logOut()
-            
-            //Display alert controller
-            let alertController =
-                AddingAlertController().successfullySignedOutPopUp(with: "Facebook")
-            present(alertController, animated: true, completion: nil)
-        } else {
-            //LogIn Facebook manager
-            LoginManager().logIn()
+    @IBAction  private func facebookSignIn(_ sender: UIButton) {
+        func facebookLogInOut() {
+            //Check if user logged in
+            if let token = AccessToken.current, !token.isExpired {
+                facebookLoginResult()
+                
+                //LogOut Facebook manager
+                LoginManager().logOut()
+                
+                //Display alert controller
+                let alertController =
+                    AddingAlertController().successfullySignedOutPopUp(with: "Facebook")
+                present(alertController, animated: true, completion: nil)
+            } else {
+                //LogIn Facebook manager
+                LoginManager().logIn()
+            }
         }
     }
     
-    
     //Get Facebook result data
-    
     private func facebookLoginResult() {
         let token = AccessToken.current?.tokenString
         let request = FBSDKLoginKit.GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], tokenString: token, version: nil, httpMethod: .get)
@@ -93,31 +79,18 @@ class WelcomeViewController: UIViewController {
             print(result as Any)
         }
     }
-
     
     //Change background image to random
-    
-    private func randomBackgroundImage() {
-        let randomNumber = Int.random(in: 0..<6)
+    private func setRandomBackgroundImage() {
+        let images = [Constants.BackgroundImages.deepNight,
+                      Constants.BackgroundImages.fallingStar,
+                      Constants.BackgroundImages.greenLeaves,
+                      Constants.BackgroundImages.riverMountain,
+                      Constants.BackgroundImages.sunsetField,
+                      Constants.BackgroundImages.twilightMoon]
         
-        switch(randomNumber) {
-        case 0:
-            backgroundImage.image = UIImage(named: Constants.BackgroundImages.deepNight)
-        case 1:
-            backgroundImage.image = UIImage(named: Constants.BackgroundImages.fallingStar)
-        case 2:
-            backgroundImage.image = UIImage(named: Constants.BackgroundImages.greenLeaves)
-        case 3:
-            backgroundImage.image = UIImage(named: Constants.BackgroundImages.riverMountain)
-        case 4:
-            backgroundImage.image = UIImage(named: Constants.BackgroundImages.sunsetField)
-        case 5:
-            backgroundImage.image = UIImage(named: Constants.BackgroundImages.twilightMoon)
-        default:
-            backgroundImage.image = UIImage(named: Constants.BackgroundImages.greenLeaves)
-        }
-        
-        backgroundImage.alpha = 0.5
+        backgroundImage.image = UIImage(named:
+                                            images.randomElement() ?? Constants.BackgroundImages.greenLeaves)
     }
 
 }

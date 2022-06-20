@@ -5,21 +5,18 @@
 //  Created by Denys Niestierov on 15.06.2022.
 //
 
-import UIKit
 import GoogleMaps
 
-class MapViewController: UIViewController{
-    
-    //Google Maps view
+final class MapViewController: UIViewController{
+
+    //MARK: - IBOutlets -
     @IBOutlet private weak var mapView: GMSMapView!
-    //Label with address
     @IBOutlet private weak var addressLabel: UILabel!
     
+    //MARK: - Variables -
     private var longitude: CLLocationDegrees = 0.0
     private var latitude: CLLocationDegrees = 0.0
-    
     private var weatherManager = WeatherManager()
-    
     var didUpdateWeather: ((_ weather: WeatherNameData?) -> Void)?
     
     override func viewDidLoad() {
@@ -28,17 +25,15 @@ class MapViewController: UIViewController{
         //Google map view delegate
         mapView.delegate = self
         
-        //Address label background alpha
-        addressLabel.backgroundColor = .lightGray.withAlphaComponent(0.8)
+        addressLabelSettings()
         
         //WeatherManager delegate
         weatherManager.delegate = self
     }
     
-    
+    //MARK: - IBActions -
     //Search button clicked
-    
-    @IBAction func getWeatherButton(_ sender: Any) {
+    @IBAction private func getWeatherButton(_ sender: Any) {
         if latitude != 0.0, longitude != 0.0 {
             
             //Load data by latitude and longitude of user marker
@@ -54,9 +49,7 @@ class MapViewController: UIViewController{
         }
     }
     
-    
     //Get coordinates
-    
     private func reverseGeocodeCoordinate(_ coordinate: CLLocationCoordinate2D) {
         
         //Create a GMSGeocoder object to turn a latitude and longitude coordinate into a street address.
@@ -77,9 +70,7 @@ class MapViewController: UIViewController{
             self.latitude = address.coordinate.latitude
         }
     }
-    
 }
-
 
 // MARK: - GMSMapViewDelegate
 
@@ -91,7 +82,6 @@ extension MapViewController: GMSMapViewDelegate {
         reverseGeocodeCoordinate(position.target)
     }
 }
-
 
 //MARK: - WeatherManagerDelegate
 
@@ -107,5 +97,13 @@ extension MapViewController: WeatherManagerDelegate {
     
     func didFailWithError(error: Error) {
         print(error)
+    }
+}
+
+//MARK: MapViewController settings
+
+private extension MapViewController{
+    func addressLabelSettings() {
+        addressLabel.backgroundColor = .lightGray.withAlphaComponent(0.8)
     }
 }

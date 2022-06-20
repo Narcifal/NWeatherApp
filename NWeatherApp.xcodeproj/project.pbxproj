@@ -98,13 +98,10 @@
 		9A5EFBD8285A7C47003B632C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				9A89CD46285CC887000239A4 /* WeatherManager.swift */,
 				9A89CD48285CC887000239A4 /* WeatherCoordinatesData.swift */,
 				9A89CD47285CC887000239A4 /* WeatherNameData.swift */,
 				9A89CD4C285CCD38000239A4 /* HourlyCollectionViewCell.swift */,
-				9A89CD4D285CCD38000239A4 /* HourlyCollectionViewCell.xib */,
 				9A5D77FF285CD87B006CF176 /* DailyTableViewCell.swift */,
-				9A5D7800285CD87B006CF176 /* DailyTableViewCell.xib */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -133,6 +130,8 @@
 			children = (
 				9AEF79EC28590CF6002DC18F /* Main.storyboard */,
 				9AEF79F128590CF7002DC18F /* LaunchScreen.storyboard */,
+				9A5D7800285CD87B006CF176 /* DailyTableViewCell.xib */,
+				9A89CD4D285CCD38000239A4 /* HourlyCollectionViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -144,6 +143,14 @@
 				9A92A3DF2859107A004FCF87 /* Constants.swift */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		9AC1F47728606B90006CF802 /* ServiceLayer   */ = {
+			isa = PBXGroup;
+			children = (
+				9A89CD46285CC887000239A4 /* WeatherManager.swift */,
+			);
+			path = "ServiceLayer  ";
 			sourceTree = "<group>";
 		};
 		9AEF79DA28590CF6002DC18F = {
@@ -168,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				9A92A3D928591038004FCF87 /* Resources */,
+				9AC1F47728606B90006CF802 /* ServiceLayer   */,
 				9A5EFBD8285A7C47003B632C /* Models */,
 				9A92A3DB28591044004FCF87 /* Views */,
 				9A92A3DA2859103E004FCF87 /* Controllers */,
