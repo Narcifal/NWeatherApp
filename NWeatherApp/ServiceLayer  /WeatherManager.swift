@@ -39,26 +39,12 @@ struct WeatherManager {
                     return
                 }
                 if let safeData = data {
-                    if let receivedCoord = self.parseCoordJSON(safeData) {
+                    if let receivedCoord = self.parseJson(safeData, expecting: WeatherCoordinatesData.self) {
                         fetchWeather(latitude: receivedCoord.coord.lat, longitude: receivedCoord.coord.lon)
                     }
                 }
             }
             task.resume()
-        }
-    }
-    
-    func parseCoordJSON(_ coordData: Data) -> WeatherCoordinatesData? {
-        let decoder = JSONDecoder()
-        do {
-            let decodedData = try decoder.decode(
-                WeatherCoordinatesData.self,
-                from: coordData)
-            
-            return decodedData
-        } catch {
-            delegate?.didFailWithError(error: error)
-            return nil
         }
     }
     
@@ -72,8 +58,7 @@ struct WeatherManager {
                     return
                 }
                 if let safeData = data {
-                    if let receivedWeather = self.parseWeatherDataJSON(safeData) {
-                        
+                    if let receivedWeather = self.parseJson(safeData, expecting: WeatherNameData.self) {
                         self.delegate?.didUpdateWeather(self, data: receivedWeather)
                     }
                 }
@@ -82,22 +67,15 @@ struct WeatherManager {
         }
     }
     
-    func parseWeatherDataJSON(_ data: Data) -> WeatherNameData? {
+    func parseJson<T: Codable>(_ data: Data, expecting: T.Type) -> T? {
         let decoder = JSONDecoder()
-        
         do {
-            let decodedData = try decoder.decode(
-                WeatherNameData.self,
-                from: data)
-
-            return decodedData
-            
+            let decodateData = try decoder.decode(expecting, from: data)
+            return decodateData
         } catch {
-            delegate?.didFailWithError(error: error)
             return nil
         }
     }
-    
 }
 
 
